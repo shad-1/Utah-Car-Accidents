@@ -1,0 +1,49 @@
+﻿main {
+    min-height: 50vh;
+    position: relative;
+}
+
+.p-relative {
+    position: relative;
+}
+
+.h-min-content {
+    height: min-content;
+}
+
+.h-vh {
+    height: calc(100vh - 67px - 57px - 60px); /*viewport - header - navbar - footer. Hacky, yes. But I don't want to rework all the asp.net default styling. */
+}
+
+.f-1_half {
+    font-size: 1.5rem;
+}
+.f-3 {
+    font-size 3rem;
+}
+
+.filter-item {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--dark);
+}
+
+    .filter-item:hover, .filter-item.active {
+        text-decoration: none;
+        color: var(--cyan);
+    }
+
+.card-heading {
+    font-weight: 400;
+    font-size: 1.25 rem;
+}
+
+.align-baseline {
+    align-content: baseline;
+}
+
+.chip-container {
+    disply: flex;
+    flex-wrap: wrap;
+    padding-right: 4rem;
+}

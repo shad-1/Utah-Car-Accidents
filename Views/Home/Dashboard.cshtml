@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Utah Crash Data";
+    //todo: dynamically update title based on county selected? 
+    //@model BookListViewModel;
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewBag.Title</h1>
+</div>
+<div class="row">
+    @* Filter Builder *@
+    <div class="col-3 sticky-top h-vh">
+        <div class="d-flex flex-column h-100 justify-content-between">
+            @* Create space between the pagination and categories*@
+            <div>
+            @*TODO: filter on multiple criteria?*@
+                <h4 class="mt-4 mb-2">Counties</h4>
+                <vc:categories></vc:categories>
+            </div>
+
+            <div class="page-navigation" page-info="@Model.PageInfo" page-action="Index"></div>
+        </div>
+
+    </div>
+    @* Crash Quick Info Cards *@
+    <div class="col-9">
+        @foreach (var crash in Model.Crashes)
+        {
+            <partial name="CrashSummary" model="crash" />
+        }
+    </div>
+</div>
