@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,12 @@ namespace YeetCarAccidents.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        //COOKIE SECTION
+        //TEST
+        [Authorize]
+        public IActionResult SuperSecret()
+        {
+            return View();
+        }
         
     }
 }
