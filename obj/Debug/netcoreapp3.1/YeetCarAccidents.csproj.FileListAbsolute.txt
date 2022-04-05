@@ -90,3 +90,6 @@
 /Users/shad/Documents/is414/intex/yeet/obj/Debug/netcoreapp3.1/YeetCarAccidents.dll
 /Users/shad/Documents/is414/intex/yeet/obj/Debug/netcoreapp3.1/YeetCarAccidents.pdb
 /Users/shad/Documents/is414/intex/yeet/obj/Debug/netcoreapp3.1/YeetCarAccidents.genruntimeconfig.cache
+/Users/shad/Documents/is414/intex/yeet/obj/Debug/netcoreapp3.1/Razor/Views/Components/Filter/Default.cshtml.g.cs
+/Users/shad/Documents/is414/intex/yeet/obj/Debug/netcoreapp3.1/Razor/Views/Home/Dashboard.cshtml.g.cs
+/Users/shad/Documents/is414/intex/yeet/obj/Debug/netcoreapp3.1/Razor/Views/Shared/CrashSummary.cshtml.g.cs
