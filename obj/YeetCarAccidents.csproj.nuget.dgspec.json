@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj": {}
+    "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\YeetCarAccidents.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj": {
+    "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\YeetCarAccidents.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj",
+        "projectUniqueName": "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\YeetCarAccidents.csproj",
         "projectName": "YeetCarAccidents",
-        "projectPath": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj",
-        "packagesPath": "C:\\Users\\jerro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\obj\\",
+        "projectPath": "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\YeetCarAccidents.csproj",
+        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jerro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
