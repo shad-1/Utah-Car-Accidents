@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj": {}
+    "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\YeetCarAccidents.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj": {
+    "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\YeetCarAccidents.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj",
+        "projectUniqueName": "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\YeetCarAccidents.csproj",
         "projectName": "YeetCarAccidents",
-        "projectPath": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj",
-        "packagesPath": "C:\\Users\\jerro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\obj\\",
+        "projectPath": "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\YeetCarAccidents.csproj",
+        "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andre\\OneDrive\\Documents\\BYU\\INTEX2\\Utah-Car-Accidents\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jerro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[3.1.21, )"
             },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[3.1.23, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.21, )"
@@ -52,7 +56,21 @@
               "target": "Package",
               "version": "[3.1.21, )"
             },
+            "Microsoft.AspNetCore.Mvc.Razor": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.23, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.21, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[3.1.21, )"
             },
