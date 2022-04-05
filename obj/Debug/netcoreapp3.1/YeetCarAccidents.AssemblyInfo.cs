@@ -10,7 +10,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-YeetCarAccidents-DB0727E1-16E3-4D3D-833B-C67A33E5B1F4")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("YeetCarAccidents")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
