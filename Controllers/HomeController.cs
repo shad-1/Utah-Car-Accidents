@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using YeetCarAccidents.Models;
 using YeetCarAccidents.Models.ViewModels;
 using YeetCarAccidents.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace YeetCarAccidents.Controllers
 {
@@ -89,7 +90,7 @@ namespace YeetCarAccidents.Controllers
                     }
                 }
                 c.CrashId = max + 1;
-                _repo.Add(c);
+                _repo.AddCrash(c);
                 return View("Confirmation", c);
             }
             else
@@ -102,13 +103,14 @@ namespace YeetCarAccidents.Controllers
         [HttpGet]
         public IActionResult Edit(int crashid)
         {
-            _repo.Update(c);
+            
             return RedirectToAction("Admin");
         }
         [HttpPost]
         public IActionResult Edit(Crash c)
         {
-
+            _repo.UpdateCrash(c);
+            return RedirectToAction("Admin");
         }
         
     }
