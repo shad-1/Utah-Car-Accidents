@@ -7,9 +7,10 @@ namespace YeetCarAccidents.Models
 	public class Location
 	{
         [Key]
+        [Column("LOCATION_ID")]
+        public int LocationID { get; set; }
         [Column("LAT_UTM_Y")]
         public Single Latitude { get; set; }
-        [Key]
         [Column("LONG_UTM_X")]
         public Single Longitude { get; set; }
         [Column("MAIN_ROAD_NAME")]
@@ -18,6 +19,10 @@ namespace YeetCarAccidents.Models
         public string City { get; set; }
         [Column("COUNTY_NAME")]
         public string County { get; set; }
+        [Column("ROUTE")]
+        public int Route { get; set; }
+        [Column("MILEPOINT")]
+        public Single Milepoint { get; set; }
     }
 }
 

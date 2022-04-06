@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YeetCarAccidents.Models
 {
-	public class Crash
-	{
+    public class Crash
+    {
         [Key]
         [Column("CRASH_ID")]
         public int CrashId { get; set; }
@@ -13,11 +13,9 @@ namespace YeetCarAccidents.Models
         [Column("CRASH_DATETIME")]
         public DateTime DateTime { get; set; }
 
-        [Column("ROUTE")]
-        public int Route { get; set; }
-
-        [Column("MILEPOINT")]
-        public Single Milepoint { get; set; }
+        [Column("LOCATION_ID")]
+        public int LocationID { get; set; }
+        public Location Location { get; set; }
 
         [Column("CRASH_SEVERITY_ID")]
         public int Severity { get; set; }

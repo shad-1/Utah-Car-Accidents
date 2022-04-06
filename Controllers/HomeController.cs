@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using YeetCarAccidents.Models;
+using YeetCarAccidents.Models.ViewModels;
+using YeetCarAccidents.Data;
 
 namespace YeetCarAccidents.Controllers
 {
@@ -13,15 +15,39 @@ namespace YeetCarAccidents.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
+        private ICrashRepository _repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICrashRepository repo)
         {
             _logger = logger;
+            _repo = repo;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Dashboard(int pageNum = 1)
+        {
+            const int cardsPerPage = 10;
+            var crashes = _repo.Crashes.ToList();
+            var locations = _repo.Locations.ToList(); //todo: add location filtering
+
+            var vm = new DashboardViewModel
+            {
+                Crashes = crashes,
+                Locations = locations,
+                PageInfo = new PageInfo
+                {
+                    Items = crashes.Count(),
+                    PerPage = cardsPerPage,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(vm);
         }
 
         public IActionResult Privacy()
