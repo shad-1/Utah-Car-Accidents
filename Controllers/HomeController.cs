@@ -33,7 +33,7 @@ namespace YeetCarAccidents.Controllers
         public async Task<IActionResult> Dashboard(int pageNum = 1)
         {
             const int cardsPerPage = 10;
-            var crashes = await _repo.Crashes.Take(cardsPerPage * 3).ToListAsync();
+            var crashes = await _repo.Crashes.Take(cardsPerPage * 3).Include("Location").ToListAsync();
             var location = await _repo.Location.Take(cardsPerPage * 3).ToListAsync(); //todo: add location filtering
             //skip based on page num with each subsequent request. Use count to calculate pages.
 
