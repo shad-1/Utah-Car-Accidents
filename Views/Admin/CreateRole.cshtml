@@ -1,7 +1,7 @@
-﻿@model YeetCarAccidents.Models.UserRole
+﻿@model YeetCarAccidents.Models.UserRoleView
 
 @{
-    ViewData["Title"] = "Create";
+        ViewData["Title"] = "Create Role";
 }
 
 <h1>Create</h1>
@@ -25,6 +25,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Admin" asp-action="ListRoles">Back to list</a>
 </div>
 

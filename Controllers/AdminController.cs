@@ -9,26 +9,29 @@ using YeetCarAccidents.Models;
 
 namespace YeetCarAccidents.Controllers
 {
-    [Authorize(Roles ="Writer")]
-    public class Admin : Controller
+    public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public Admin(RoleManager<IdentityRole> roleManager)
+        public AdminController(RoleManager<IdentityRole> roleManager)
         {
             this.roleManager = roleManager;
         }
-
-        public IActionResult Index()
+        //VIEW ALL ROLES
+        [HttpGet]
+        public IActionResult ListRoles()
         {
-            return View();
+            var roles = roleManager.Roles;
+            return View(roles);
         }
-        public IActionResult Create()
+        //CREATE ROLES
+        [HttpGet]
+        public IActionResult CreateRole()
         {
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(UserRole role)
+        public async Task<IActionResult> CreateRole(UserRoleView role)
         {
             var roleExist = await roleManager.RoleExistsAsync(role.RoleName);
             if (!roleExist)

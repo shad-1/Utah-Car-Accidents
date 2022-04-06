@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TygCNcZ2bcgspUqFYmFp8fMGFSlCCfA2iET0zxTUnnjdz2L7yHi8Hx7Cjpz+/4vpeK6nKOch0ZhnkuH50uDBoA==",
+  "dgSpecHash": "iOz8QLydrgauT4vc/vwGxH1PibUz3k3sPpsvIuqFZYWcQhTOnWT9U59BMYJelg6yl8en92oxpC0Ic5bNYeOvxA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj",
+  "projectFilePath": "C:\\Users\\jerro\\Source\\Repos\\root_yeet_kit\\YeetCarAccidents.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jerro\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\jerro\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

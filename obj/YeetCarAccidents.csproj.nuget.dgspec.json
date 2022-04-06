@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj": {}
+    "C:\\Users\\jerro\\Source\\Repos\\root_yeet_kit\\YeetCarAccidents.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj": {
+    "C:\\Users\\jerro\\Source\\Repos\\root_yeet_kit\\YeetCarAccidents.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj",
+        "projectUniqueName": "C:\\Users\\jerro\\Source\\Repos\\root_yeet_kit\\YeetCarAccidents.csproj",
         "projectName": "YeetCarAccidents",
-        "projectPath": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\YeetCarAccidents.csproj",
+        "projectPath": "C:\\Users\\jerro\\Source\\Repos\\root_yeet_kit\\YeetCarAccidents.csproj",
         "packagesPath": "C:\\Users\\jerro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jerro\\source\\repos\\YeetCarAccidents\\obj\\",
+        "outputPath": "C:\\Users\\jerro\\Source\\Repos\\root_yeet_kit\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jerro\\AppData\\Roaming\\NuGet\\NuGet.Config",

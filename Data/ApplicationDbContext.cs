@@ -13,6 +13,6 @@ namespace YeetCarAccidents.Data
             : base(options)
         {
         }
-        public DbSet<YeetCarAccidents.Models.UserRole> UserRole { get; set; }
+        public DbSet<YeetCarAccidents.Models.UserRoleView> UserRole { get; set; }
     }
 }

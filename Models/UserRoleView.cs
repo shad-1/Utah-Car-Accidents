@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace YeetCarAccidents.Models
 {
-    public class UserRole
+    public class UserRoleView
     {
         public int Id { get; set; }
         public string RoleName { get; set; }
