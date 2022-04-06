@@ -32,12 +32,24 @@ namespace YeetCarAccidents.Data
             }
         }
 
-        public async void DeleteCrash(Crash c)
+        //public async void DeleteCrash(Crash c)
+        //{
+        //    try
+        //    {
+        //        _ctx.Crashes.Remove(c);
+        //        await _ctx.SaveChangesAsync();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //    }
+        //}
+        public void DeleteCrash(Crash c)
         {
             try
             {
                 _ctx.Crashes.Remove(c);
-                await _ctx.SaveChangesAsync();
+                _ctx.SaveChanges();
             }
             catch (Exception e)
             {
@@ -45,12 +57,24 @@ namespace YeetCarAccidents.Data
             }
         }
 
-        public async void UpdateCrash(Crash c)
+        //public async void UpdateCrash(Crash c)
+        //{
+        //    try
+        //    {
+        //        _ctx.Crashes.Update(c);
+        //        await _ctx.SaveChangesAsync();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //    }
+        //}
+        public void UpdateCrash(Crash c)
         {
             try
             {
                 _ctx.Crashes.Update(c);
-                await _ctx.SaveChangesAsync();
+                _ctx.SaveChanges();
             }
             catch (Exception e)
             {

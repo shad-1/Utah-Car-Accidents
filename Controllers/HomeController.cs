@@ -63,25 +63,33 @@ namespace YeetCarAccidents.Controllers
         }
         //COOKIE SECTION
 
-
-        public IActionResult Admin()
+        [HttpGet]
+        public async Task<IActionResult> Admin()
         {
-            var crashes = _repo.Crashes.Include("Location").ToList();
+
+            var crashes = await _repo.Crashes.Include("Location").Take(15).ToListAsync();
             return View(crashes);
+
+            //var crashes = await _repo.Crashes.Take(15).ToListAsync();
+            //var c = new AdminViewModel
+            //{
+            //    Crashes = crashes
+            //};
+            //return View(c);
         }
 
         [HttpGet]
-        public IActionResult CrashChange()
+        public async Task<IActionResult> CrashChange()
         {
-            ViewBag.Location = _repo.Location.ToList();
+            ViewBag.Location = await _repo.Location.ToListAsync();
             return View();
         }
         [HttpPost]
-        public IActionResult CrashChange(Crash c)
+        public async Task<IActionResult> CrashChange(Crash c)
         {
             if (ModelState.IsValid)
             {
-                var crashes = _repo.Crashes.ToList();
+                var crashes = await _repo.Crashes.Take(100000).ToListAsync();
                 var max = 0;
                 foreach(Crash crash in crashes)
                 {
@@ -96,17 +104,17 @@ namespace YeetCarAccidents.Controllers
             }
             else
             {
-                ViewBag.Location = _repo.Location.ToList();
+                ViewBag.Location = await _repo.Location.ToListAsync();
                 return View();
             }
         }
 
         [HttpGet]
-        public IActionResult Edit(int crashid)
+        public async Task<IActionResult> Edit(int crashid)
         {
-            ViewBag.Location = _repo.Location.ToList();
-            var crash = _repo.Crashes.Single(x => x.CrashId == crashid);
-            return RedirectToAction("CrashChange", crash);
+            ViewBag.Location = await _repo.Location.ToListAsync();
+            var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
+            return View("CrashChange", crash);
         }
         [HttpPost]
         public IActionResult Edit(Crash c)
@@ -116,16 +124,16 @@ namespace YeetCarAccidents.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int crashid)
+        public async Task<IActionResult> Delete(int crashid)
         {
-            var crash = _repo.Crashes.Single(x => x.CrashId == crashid);
+            var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
             return View(crash);
         }
 
         [HttpPost]
-        public IActionResult Delete(Crash crash)
+        public async Task<IActionResult> Delete(Crash crash)
         {
-            var c = _repo.Crashes.Single(x => x.CrashId == crash.CrashId);
+            var c = await _repo.Crashes.SingleAsync(x => x.CrashId == crash.CrashId);
             _repo.DeleteCrash(c);
             return RedirectToAction("Admin");
         }
