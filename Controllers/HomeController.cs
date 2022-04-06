@@ -70,13 +70,13 @@ namespace YeetCarAccidents.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult CrashChange()
         {
             ViewBag.Locations = _repo.Locations.ToList();
             return View();
         }
         [HttpPost]
-        public IActionResult Add(Crash c)
+        public IActionResult CrashChange(Crash c)
         {
             if (ModelState.IsValid)
             {
@@ -103,13 +103,29 @@ namespace YeetCarAccidents.Controllers
         [HttpGet]
         public IActionResult Edit(int crashid)
         {
-            
-            return RedirectToAction("Admin");
+            ViewBag.Locations = _repo.Locations.ToList();
+            var crash = _repo.Crashes.Single(x => x.CrashId == crashid);
+            return RedirectToAction("CrashChange", crash);
         }
         [HttpPost]
         public IActionResult Edit(Crash c)
         {
             _repo.UpdateCrash(c);
+            return RedirectToAction("Admin");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int crashid)
+        {
+            var crash = _repo.Crashes.Single(x => x.CrashId == crashid);
+            return View(crash);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Crash crash)
+        {
+            var c = _repo.Crashes.Single(x => x.CrashId == crash.CrashId);
+            _repo.DeleteCrash(c);
             return RedirectToAction("Admin");
         }
         

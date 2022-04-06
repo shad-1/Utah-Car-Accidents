@@ -6,25 +6,28 @@
 }
 @model List<Crash>
 
-    <a asp-controller="Home" asp-action="add">Add</a>
+<a asp-controller="Home" asp-action="CrashChange">Add</a>
 
 <table class="table table-sm table-striped table-bordered">
     <thead>
         <tr>
-            <td></td>
+            <th>Severity</th>
+            <th>DateTime</th>
+            <th>Road Name</th>
+            <th>City</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(Crash c in Model)
+        @foreach(var c in Model)
             {
-        <tr>
-            <td>@c.Severity</td>
-            <td>@c.DateTime</td>
-            <td>@c.Location.RoadName</td>
-            <td>@c.Location.City</td>
-            <td><a asp-controller="Home" asp-action="Edit" asp-route-crashid="@c.CrashId">Edit</a></td>
-            <td><a asp-controller="Home" asp-action="Delete" asp-route-crashid="@c.CrashId">Delete</a></td>
-        </tr>
+            <tr>
+                <td>@c.Severity</td>
+                <td>@c.DateTime</td>
+                <td>@c.Location.RoadName</td>
+                <td>@c.Location.City</td>
+                <td><a asp-controller="Home" asp-action="Edit" asp-route-crashid="@c.CrashId">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-crashid="@c.CrashId">Delete</a></td>
+            </tr>
             }
     </tbody>
 </table>
