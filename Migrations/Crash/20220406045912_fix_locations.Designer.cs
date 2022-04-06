@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YeetCarAccidents.Data;
 
 namespace YeetCarAccidents.Migrations.Crash
 {
     [DbContext(typeof(CrashContext))]
-    partial class CrashContextModelSnapshot : ModelSnapshot
+    [Migration("20220406045912_fix_locations")]
+    partial class fix_locations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,7 +164,7 @@ namespace YeetCarAccidents.Migrations.Crash
             modelBuilder.Entity("YeetCarAccidents.Models.Crash", b =>
                 {
                     b.HasOne("YeetCarAccidents.Models.Location", "Location")
-                        .WithMany("Crash")
+                        .WithMany()
                         .HasForeignKey("LocationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

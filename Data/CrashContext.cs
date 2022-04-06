@@ -11,8 +11,7 @@ namespace YeetCarAccidents.Data
 		}
 
 		public DbSet<Crash> Crashes { get; set; }
-		public DbSet<Location> Locations { get; set; }
-
+		public DbSet<Location> Location { get; set; }
 	}
 }
 

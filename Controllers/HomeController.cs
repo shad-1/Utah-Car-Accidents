@@ -30,16 +30,17 @@ namespace YeetCarAccidents.Controllers
         }
 
         [HttpGet]
-        public IActionResult Dashboard(int pageNum = 1)
+        public async Task<IActionResult> Dashboard(int pageNum = 1)
         {
             const int cardsPerPage = 10;
-            var crashes = _repo.Crashes.ToList();
-            var locations = _repo.Locations.ToList(); //todo: add location filtering
+            var crashes = await _repo.Crashes.Take(cardsPerPage * 3).ToListAsync();
+            var location = await _repo.Location.Take(cardsPerPage * 3).ToListAsync(); //todo: add location filtering
+            //skip based on page num with each subsequent request. Use count to calculate pages.
 
             var vm = new DashboardViewModel
             {
                 Crashes = crashes,
-                Locations = locations,
+                Locations = location,
                 PageInfo = new PageInfo
                 {
                     Items = crashes.Count(),
@@ -72,7 +73,7 @@ namespace YeetCarAccidents.Controllers
         [HttpGet]
         public IActionResult CrashChange()
         {
-            ViewBag.Locations = _repo.Locations.ToList();
+            ViewBag.Location = _repo.Location.ToList();
             return View();
         }
         [HttpPost]
@@ -95,7 +96,7 @@ namespace YeetCarAccidents.Controllers
             }
             else
             {
-                ViewBag.Locations = _repo.Locations.ToList();
+                ViewBag.Location = _repo.Location.ToList();
                 return View();
             }
         }
@@ -103,7 +104,7 @@ namespace YeetCarAccidents.Controllers
         [HttpGet]
         public IActionResult Edit(int crashid)
         {
-            ViewBag.Locations = _repo.Locations.ToList();
+            ViewBag.Location = _repo.Location.ToList();
             var crash = _repo.Crashes.Single(x => x.CrashId == crashid);
             return RedirectToAction("CrashChange", crash);
         }

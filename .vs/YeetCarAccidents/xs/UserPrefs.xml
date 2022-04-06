@@ -32,5 +32,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <Debugger.DebugSourceFolders>
+    <String>/Users/shad/Library/Caches/VisualStudio/17.0/Symbols/mysql-net/MySqlConnector/cb421c59667b043e10c0a3a92708edda879934cc</String>
+  </Debugger.DebugSourceFolders>
   <MultiItemStartupConfigurations />
 </Properties>

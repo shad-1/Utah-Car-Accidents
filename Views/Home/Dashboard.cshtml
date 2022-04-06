@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Utah Crash Data";
     //todo: dynamically update title based on county selected? 
-    //@model BookListViewModel;
+    //@model 
 }
 
 <div class="text-center">
@@ -24,7 +24,7 @@
     </div>
     @* Crash Quick Info Cards *@
     <div class="col-9">
-        @foreach (var crash in Model.Crashes)
+        @foreach (Crash crash in Model.Crashes)
         {
             <partial name="CrashSummary" model="crash" />
         }

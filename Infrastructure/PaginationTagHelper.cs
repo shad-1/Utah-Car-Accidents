@@ -11,7 +11,7 @@ using YeetCarAccidents.Models.ViewModels;
 
 namespace bookstore.Infrastructure
 {
-	[HtmlTargetElement("div", Attributes = "page-info")] //@todo: read up on this
+	[HtmlTargetElement("div", Attributes = "page-info")]
 	public class PaginationTagHelper : TagHelper
 	{
 		private IUrlHelperFactory urlHelperFactory;
@@ -21,7 +21,6 @@ namespace bookstore.Infrastructure
 			urlHelperFactory = factory;
 		}
 
-		//@todo: learn about ViewContext
 		[ViewContext]
 		[HtmlAttributeNotBound]
 		public ViewContext viewContext { get; set; }
@@ -31,10 +30,7 @@ namespace bookstore.Infrastructure
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-			//base.Process(context, output);
-			IUrlHelper helper = urlHelperFactory.GetUrlHelper(viewContext); //@todo: Figure out what this does and why we shouldn\"t call the base method
-
-			//TODO: Consider using the normal tag builder objects and applying properties.
+			IUrlHelper helper = urlHelperFactory.GetUrlHelper(viewContext); 
 			//TODO: Add 'Prev' and 'Next' buttons to be flashy...
 
 			//Use bootstrap styles for paginaiton (thus the stringbuilder)
@@ -52,7 +48,7 @@ namespace bookstore.Infrastructure
 					);
             }
 			_output.Append("</ul></nav>");
-			//This was tricky. I had to convert the string to an HtmlString, else it would render as plain text.
+
 			output.Content.SetHtmlContent(new HtmlString(_output.ToString()));
 
 		}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using YeetCarAccidents.Models;
 
 namespace YeetCarAccidents.Data
@@ -15,7 +16,7 @@ namespace YeetCarAccidents.Data
 
 
         public IQueryable<Crash> Crashes => _ctx.Crashes;
-        public IQueryable<Location> Locations => _ctx.Locations;
+        public IQueryable<Location> Location => _ctx.Location;
 
 
         public async void AddCrash(Crash c)
@@ -23,19 +24,6 @@ namespace YeetCarAccidents.Data
             try
             {
                 _ctx.Crashes.Add(c);
-                await _ctx.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
-        public async void AddLocation(Location l)
-        {
-            try
-            {
-                _ctx.Locations.Add(l);
                 await _ctx.SaveChangesAsync();
             }
             catch (Exception e)
@@ -57,19 +45,6 @@ namespace YeetCarAccidents.Data
             }
         }
 
-        public async void DeleteLocation(Location l)
-        {
-            try
-            {
-                _ctx.Locations.Remove(l);
-                await _ctx.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
         public async void UpdateCrash(Crash c)
         {
             try
@@ -83,18 +58,6 @@ namespace YeetCarAccidents.Data
             }
         }
 
-        public async void UpdateLocation(Location l)
-        {
-            try
-            {
-                _ctx.Locations.Update(l);
-                await _ctx.SaveChangesAsync();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
     }
 }
 

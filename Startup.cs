@@ -29,12 +29,10 @@ namespace YeetCarAccidents
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CrashContext>(options =>
-                options.UseMySql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -74,8 +72,16 @@ namespace YeetCarAccidents
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                   name: "pagination",
+                   pattern: "Dashboard/Page/{pageNum}",
+                   defaults: new { controller = "Home", action = "Dashboard" }
+                );
+
+                endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
+
                 endpoints.MapRazorPages();
             });
         }
