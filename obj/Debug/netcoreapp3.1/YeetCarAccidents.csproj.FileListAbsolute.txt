@@ -390,3 +390,5 @@ C:\Users\jerro\Source\Repos\root_yeet_kit\obj\Debug\netcoreapp3.1\YeetCarAcciden
 C:\Users\jerro\Source\Repos\root_yeet_kit\obj\Debug\netcoreapp3.1\Razor\Views\Admin\CreateRole.cshtml.g.cs
 C:\Users\jerro\Source\Repos\root_yeet_kit\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ListRoles.cshtml.g.cs
 C:\Users\jerro\Source\Repos\root_yeet_kit\obj\Debug\netcoreapp3.1\Razor\Views\Shared\NotFound.cshtml.g.cs
+C:\Users\jerro\Source\Repos\root_yeet_kit\obj\Debug\netcoreapp3.1\Razor\Views\Admin\EditUsersInRole.cshtml.g.cs
+C:\Users\jerro\Source\Repos\root_yeet_kit\obj\Debug\netcoreapp3.1\Razor\Views\Admin\ListUsers.cshtml.g.cs

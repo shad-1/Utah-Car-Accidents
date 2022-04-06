@@ -1,25 +1,25 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@model IEnumerable<IdentityRole>
+@model IEnumerable<IdentityUser>
 @{
-    ViewBag.Title = "All Roles";
+    ViewBag.Title = "All Users";
 }
 
 <h1>All Roles</h1>
 @if (Model.Any())
 {
     <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole" asp-controller="Admin">Add new role</a>
-    foreach (var role in Model)
+    foreach (var user in Model)
     {
         <div class="card mb-3">
             <div class="card-header">
-                Role Id: @role.Id
+                User Id: @user.Id
             </div>
             <div class="card-body">
-                <h5 class="card-title">@role.Name</h5>
+                <h5 class="card-title">@user.UserName</h5>
             </div>
             <div class="card-footer">
-                <a class="btn btn-primary" asp-action="EditUsersInRole" asp-controller="Admin" asp-route-id="@role.Id">Edit</a>
-                <a href="#" class="btn btn-danger">Delete</a>
+@*                <a class="btn btn-primary" asp-action="EditUsersInRole" asp-controller="Admin" asp-route-id="@user.Id">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>*@
             </div>
         </div>
 
