@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Http;
 
-namespace bookstore.Infrastructure
+namespace YeetCarAccidents.Infrastructure
 {
 	public static class UrlExtensions
 	{

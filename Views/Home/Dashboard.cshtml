@@ -1,8 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Utah Crash Data";
     //todo: dynamically update title based on county selected? 
-    //@model 
 }
+
+@model DashboardViewModel;
 
 <div class="text-center">
     <h1 class="display-4">@ViewBag.Title</h1>
@@ -18,7 +19,7 @@
                 <vc:filter></vc:filter>
             </div>
 
-            <div class="page-navigation" page-info="@Model.PageInfo" page-action="Index"></div>
+            <div class="page-navigation" page-info="@Model.PageInfo" page-action="Dashboard"></div>
         </div>
 
     </div>

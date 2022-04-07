@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using YeetCarAccidents.Models.ViewModels;
 
-namespace bookstore.Infrastructure
+namespace YeetCarAccidents.Infrastructure
 {
 	[HtmlTargetElement("div", Attributes = "page-info")]
 	public class PaginationTagHelper : TagHelper

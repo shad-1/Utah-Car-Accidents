@@ -2,7 +2,7 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
 
-namespace bookstore.Infrastructure
+namespace YeetCarAccidents.Infrastructure
 {
 	public static class SessionExtensions
 	{

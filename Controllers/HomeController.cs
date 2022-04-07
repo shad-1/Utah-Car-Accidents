@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using YeetCarAccidents.Models;
 using YeetCarAccidents.Models.ViewModels;
 using YeetCarAccidents.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace YeetCarAccidents.Controllers
 {
@@ -68,17 +66,25 @@ namespace YeetCarAccidents.Controllers
 
             return View(vm);
         }
-
+        [Route("Privacy")]
+        [Route("Home/Privacy")]
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
         }
+
+        [Route("Error")]
+        [HttpGet]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         //TEST
+        [Route("SuperSecret")]
+        [Route("Home/SuperSecret")]
+        [HttpGet]
         [Authorize]
         public IActionResult SuperSecret()
         {
@@ -86,6 +92,8 @@ namespace YeetCarAccidents.Controllers
         }
         //COOKIE SECTION
 
+        [Route("Privacy")]
+        [Route("Home/Admin")]
         [HttpGet]
         public async Task<IActionResult> Admin()
         {
@@ -101,12 +109,17 @@ namespace YeetCarAccidents.Controllers
             //return View(c);
         }
 
+        [Route("CrashChange")]
+        [Route("Home/CrashChange")]
         [HttpGet]
         public async Task<IActionResult> CrashChange()
         {
             ViewBag.Location = await _repo.Location.ToListAsync();
             return View();
         }
+
+
+        [Route("Home/CrashChange")]
         [HttpPost]
         public async Task<IActionResult> CrashChange(Crash c)
         {
@@ -132,6 +145,8 @@ namespace YeetCarAccidents.Controllers
             }
         }
 
+        [Route("Edit")]
+        [Route("Home/Edit")]
         [HttpGet]
         public async Task<IActionResult> Edit(int crashid)
         {
@@ -139,6 +154,8 @@ namespace YeetCarAccidents.Controllers
             var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
             return View("CrashChange", crash);
         }
+
+        [Route("Home/Edit")]
         [HttpPost]
         public IActionResult Edit(Crash c)
         {
@@ -146,6 +163,8 @@ namespace YeetCarAccidents.Controllers
             return RedirectToAction("Admin");
         }
 
+        [Route("Delete")]
+        [Route("Home/Delete")]
         [HttpGet]
         public async Task<IActionResult> Delete(int crashid)
         {
@@ -153,6 +172,7 @@ namespace YeetCarAccidents.Controllers
             return View(crash);
         }
 
+        [Route("Delete")]
         [HttpPost]
         public async Task<IActionResult> Delete(Crash crash)
         {
