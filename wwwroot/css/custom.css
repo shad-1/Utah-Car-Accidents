@@ -1,4 +1,7 @@
-﻿main {
+﻿body {
+    position: relative;
+}
+main {
     min-height: 50vh;
     position: relative;
 }
@@ -46,4 +49,13 @@
     disply: flex;
     flex-wrap: wrap;
     padding-right: 4rem;
+}
+
+/* Loading Spinner */
+#loader {
+    width: 200px;
+    height: 100px;
+    display: none;
+    position: absolute;
+    z-index: 999;
 }

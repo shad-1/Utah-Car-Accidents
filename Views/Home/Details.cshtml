@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Details";
+}
+
+@model YeetCarAccidents.Models.Crash;
+
+    <a asp-controller="Home" asp-action="Admin" class="btn btn-primary">Back</a>
+    <table class="table table-sm table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Label</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Severity</td><td>@Model.Severity</td></tr>
+            <tr><td>Date Time</td><td>@Model.DateTime</td></tr>
+            <tr><td>Road Name</td><td>@Model.Location.RoadName</td></tr>
+            <tr><td>City</td><td>@Model.Location.City</td></tr>
+            <tr><td>County</td><td>@Model.Location.County</td></tr>
+            <tr><td>Workzone Related:</td><td>@Model.WorkZone</td></tr>
+            <tr><td>Pedestrian Involved:</td><td>@Model.Pedestrian</td></tr>
+            <tr><td>Bicyclist Involved:</td><td>@Model.Bicyclist</td></tr>
+            <tr><td>Motorcycle Involved:</td><td>@Model.Motorcycle</td></tr>
+            <tr><td>Improper Restraint:</td><td>@Model.ImproperRestraint</td></tr>
+            <tr><td>Unrestrained:</td><td>@Model.Unrestrained</td></tr>
+            <tr><td>DUI:</td><td>@Model.Dui</td></tr>
+            <tr><td>Intersection Related:</td><td>@Model.Intersection</td></tr>
+            <tr><td>Wild Animal Related:</td><td>@Model.WildAnimal</td></tr>
+            <tr><td>Animal Related:</td><td>@Model.DomesticAnimal</td></tr>
+            <tr><td>Overturn Rollover:</td><td>@Model.Rollover</td></tr>
+            <tr><td>Commercial Motor Vehicle Involved:</td><td>@Model.Commercial</td></tr>
+            <tr><td>Teenage Driver Involved:</td><td>@Model.Teenage</td></tr>
+            <tr><td>Older Driver Involved:</td><td>@Model.Older</td></tr>
+            <tr><td>Night Dark Condition:</td><td>@Model.Night</td></tr>
+            <tr><td>Single Vehicle:</td><td>@Model.SingleVehicle</td></tr>
+            <tr><td>Distracted Driving:</td><td>@Model.Distracted</td></tr>
+            <tr><td>Drowsy Driving:</td><td>@Model.Drowsy</td></tr>
+            <tr><td>Roadway Departure:</td><td>@Model.RoadwayDeparture</td></tr>
+
+            @*<tr>
+                <td>Severity</td>
+        <td>Date Time</td>
+        <td>Road Name</td>
+        <td>City</td>
+        <td>County</td>
+        <td>Workzone Related:</td>
+        <td>Pedestrian Involved:</td>
+        <td>Bicyclist Involved:</td>
+        <td>Motorcycle Involved:</td>
+        <td>Improper Restraint:</td>
+        <td>Unrestrained:</td>
+        <td>DUI:</td>
+        <td>Intersection Related:</td>
+        <td>Wild Animal Related:</td>
+        <td>Animal Related:</td>
+        <td>Overturn Rollover:</td>
+        <td>Commercial Motor Vehicle Involved:</td>
+        <td>Teenage Driver Involved:</td>
+        <td>Older Driver Involved:</td>
+        <td>Night Dark Condition:</td>
+        <td>Single Vehicle:</td>
+        <td>Distracted Driving:</td>
+        <td>Drowsy Driving:</td>
+        <td>Roadway Departure:</td>
+        </tr>*@
+        </tbody>
+    </table>
