@@ -85,9 +85,11 @@ namespace YeetCarAccidents.Controllers
         [Route("SuperSecret")]
         [Route("Home/SuperSecret")]
         [HttpGet]
-        [Authorize]
-        public IActionResult SuperSecret()
+/*        [Authorize(Roles ="Writer")]
+*/        public IActionResult SuperSecret()
         {
+            bool isAdmin = HttpContext.User.IsInRole("Writer");
+            ViewBag.isAdmin = isAdmin;
             return View();
         }
         //COOKIE SECTION
