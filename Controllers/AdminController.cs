@@ -20,6 +20,8 @@ namespace YeetCarAccidents.Controllers
             this.userManager = userManager;
         }
         //VIEW ALL USERS
+        [Route("Admin/ListUsers")]
+        [HttpGet]
         [Authorize(Roles ="Writer")]
         public IActionResult ListUsers()
         {
@@ -27,6 +29,7 @@ namespace YeetCarAccidents.Controllers
             return View(users);
         }
         //VIEW ALL ROLES
+        [Route("Admin/ListRoles")]
         [HttpGet]
         [Authorize(Roles = "Writer")]
         public IActionResult ListRoles()
@@ -36,11 +39,13 @@ namespace YeetCarAccidents.Controllers
         }
         //CREATE ROLES
         [HttpGet]
+        [Route("Admin/CreateRole")]
         [Authorize(Roles = "Writer")]
         public IActionResult CreateRole()
         {
             return View();
         }
+        [Route("Admin/CreateRole")]
         [HttpPost]
         [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateRole(UserRoleView role)
@@ -53,6 +58,7 @@ namespace YeetCarAccidents.Controllers
             return View();
         }
         //CHANGE ROLES OF USERS
+        [Route("Admin/EditUsersInRole")]
         [HttpGet]
         [Authorize(Roles = "Writer")]
         public async Task<IActionResult> EditUsersInRole(string Id)
@@ -85,6 +91,7 @@ namespace YeetCarAccidents.Controllers
             }
             return View(model);
         }
+        [Route("Admin/EditUsersInRole")]
         [HttpPost]
         [Authorize(Roles = "Writer")]
         public async Task<IActionResult> EditUsersInRole(List<UserModel> model, string Id)
