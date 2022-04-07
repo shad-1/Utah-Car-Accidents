@@ -25,18 +25,34 @@ namespace YeetCarAccidents.Controllers
             _repo = repo;
         }
 
+        [Route("~/")]
+        [Route("Home")]
+        [Route("Index")]
+        [Route("Home/Index")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Route("Dashboard")]
+        [Route("Home/Dashboard")]
+        [Route("Dashboard/{County}")]
+        [Route("Home/Dashboard/{County}")]
+        [Route("Dashboard/{County}/{pageNum}")]
+        [Route("Home/Dashboard/{County}/{pageNum}")]
         [HttpGet]
-        public async Task<IActionResult> Dashboard(int pageNum = 1)
+        public async Task<IActionResult> Dashboard(string County = "All", int pageNum = 1)
         {
             const int cardsPerPage = 10;
-            var crashes = await _repo.Crashes.Take(cardsPerPage * 3).Include("Location").ToListAsync();
+            var crashes = await _repo.Crashes
+                .OrderByDescending(crash => crash.DateTime)
+                .Skip((pageNum -1) * cardsPerPage)
+                .Take(cardsPerPage)
+                .Include("Location")
+                .ToListAsync();
+
             var location = await _repo.Location.Take(cardsPerPage * 3).ToListAsync(); //todo: add location filtering
-            //skip based on page num with each subsequent request. Use count to calculate pages.
 
             var vm = new DashboardViewModel
             {

@@ -82,18 +82,20 @@ namespace YeetCarAccidents
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                   name: "pagination",
-                   pattern: "Dashboard/Page/{pageNum}",
-                   defaults: new { controller = "Home", action = "Dashboard" }
-                );
+                //endpoints.MapControllerRoute(
+                //   name: "pagination",
+                //   pattern: "Dashboard/Page/{pageNum}",
+                //   defaults: new { controller = "Home", action = "Dashboard" }
+                //);
 
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"
-                );
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}"
+                //);
 
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
+
             });
         }
     }

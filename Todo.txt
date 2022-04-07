@@ -5,3 +5,10 @@
 - Get rid of SessionExtensions and UrlExtensions if they are not needed (which is probably the case)
 
 - View model for the dashboard page needs to include crash, location information, and all the true features for a given crash
+
+
+- Simplify the data coming into the dashboard view, the crash summary partial view, and add filtering.
+
+- Pagination. 
+
+- Look into dashboard components

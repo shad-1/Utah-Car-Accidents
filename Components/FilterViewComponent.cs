@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using YeetCarAccidents.Data;
 
 namespace YeetCarAccidents.Components
 {
 	public class FilterViewComponent : ViewComponent
 	{
-		//private  _repo { get; set; }
+        private ICrashRepository _repo { get; set; }
 
-		//public FilterViewComponent(repo)
-		//{
-		//	_repo = repo;
-		//}
+    public FilterViewComponent(ICrashRepository repo)
+    {
+        _repo = repo;
+    }
 
-		public IViewComponentResult Invoke()
+    public IViewComponentResult Invoke()
 		{
 			//Get all the distinct counties from all crashes
-			var counties = ""; //_repo.Crashes
-				//.Select(x => x.County)
-				//.Distinct()
-				//.OrderBy(x => x);
+			var counties = _repo.Location
+                .Select(l => l.County)
+                .Distinct()
+                .OrderBy(l => l);
 
-			return View(counties);
+            return View(counties);
 		}
 	}
 }
