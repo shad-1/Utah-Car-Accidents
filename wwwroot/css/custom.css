@@ -1,4 +1,7 @@
-﻿body {
+﻿:root {
+    --body-height: calc(100vh - 67px - 57px - 60px); /*viewport - header - navbar - footer. Hacky, yes. But I don't want to rework all the asp.net default styling. */
+}
+body {
     position: relative;
 }
 main {
@@ -15,7 +18,7 @@ main {
 }
 
 .h-vh {
-    height: calc(100vh - 67px - 57px - 60px); /*viewport - header - navbar - footer. Hacky, yes. But I don't want to rework all the asp.net default styling. */
+    height: var(--body-height);
 }
 
 .f-1_half {
@@ -53,9 +56,14 @@ main {
 
 /* Loading Spinner */
 #loader {
-    width: 200px;
-    height: 100px;
+    width: 100vw;
+    height: calc(100vh - 57px);
+    background: #fff;
     display: none;
+    top: 57px; /* navbar height */
     position: absolute;
     z-index: 999;
+    justify-content: center;
+    align-items: center;
 }
+

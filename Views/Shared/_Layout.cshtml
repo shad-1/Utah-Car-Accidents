@@ -18,11 +18,9 @@
         function ShowProgress(clicked = false) {
             loading = document.getElementById("loader");
             if (clicked) {
-                loading.style.display = "block";
-                var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
-                var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
-                loading.style.top = top + "px";
-                loading.style.left = left + "px";
+                container = document.getElementsByClassName("container")[1]
+                loading.style.display = "flex";
+
             }
         };
         ShowProgress();
