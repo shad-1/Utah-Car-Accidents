@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using YeetCarAccidents.Models;
 using YeetCarAccidents.Models.ViewModels;
 using YeetCarAccidents.Data;
+using CoordinateSharp;
 
 namespace YeetCarAccidents.Controllers
 {
@@ -92,6 +93,21 @@ namespace YeetCarAccidents.Controllers
         }
         //COOKIE SECTION
 
+        [Route("MapCrash")]
+        [Route("Home/MapCrash")]
+        [HttpGet]
+        public async Task<IActionResult> MapCrash(int crashid)
+        {
+            ViewBag.Location = await _repo.Location.ToListAsync();
+            var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
+            //UniversalTransverseMercator utm = new UniversalTransverseMercator("Q", 14, 581943.5, 2111989.8);
+            UniversalTransverseMercator utm = new UniversalTransverseMercator("Q", 14, (double) crash.Location.Longitude, (double)crash.Location.Latitude);
+            Coordinate c = UniversalTransverseMercator.ConvertUTMtoLatLong(utm);
+
+            return View(c);
+        }
+
+
         [Route("Privacy")]
         [Route("Home/Admin")]
         [HttpGet]
@@ -107,6 +123,17 @@ namespace YeetCarAccidents.Controllers
             //    Crashes = crashes
             //};
             //return View(c);
+        }
+
+        [Route("Details")]
+        [Route("Home/Details")]
+        [HttpGet]
+        public async Task<IActionResult> Details(int crashid)
+        {
+            ViewBag.Location = await _repo.Location.ToListAsync();
+            var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
+            return View("Details", crash);
+
         }
 
         [Route("CrashChange")]

@@ -6,7 +6,7 @@
 }
 @model List<Crash>
 
-<a asp-controller="Home" asp-action="CrashChange">Add</a>
+<a asp-controller="Home" asp-action="CrashChange" class="btn btn-primary">Add</a>
 
 <table class="table table-sm table-striped table-bordered">
     <thead>
@@ -20,14 +20,17 @@
     <tbody>
         @foreach(var c in Model)
             {
-            <tr>
-                <td>@c.Severity</td>
-                <td>@c.DateTime</td>
-                <td>@c.Location.RoadName</td>
-                <td>@c.Location.City</td>
-                <td><a asp-controller="Home" asp-action="Edit" asp-route-crashid="@c.CrashId">Edit</a></td>
-                <td><a asp-controller="Home" asp-action="Delete" asp-route-crashid="@c.CrashId">Delete</a></td>
-            </tr>
+        <tr>
+            <td>@c.Severity</td>
+            <td>@c.DateTime</td>
+            <td>@c.Location.RoadName</td>
+            <td>@c.Location.City</td>
+            <td><a asp-controller="Home" asp-action="Edit" asp-route-crashid="@c.CrashId" class="btn btn-info">Edit</a></td>
+            <td><a asp-controller="Home" asp-action="Details" asp-route-crashid="@c.CrashId" class="btn btn-warning">Details</a></td>
+            <td><a asp-controller="Home" asp-action="Delete" asp-route-crashid="@c.CrashId" class="btn btn-danger">Delete</a></td>
+            <td><a asp-controller="Home" asp-action="MapCrash" asp-route-crashid="@c.CrashId">Map</a></td>
+
+        </tr>
             }
     </tbody>
 </table>

@@ -40,12 +40,39 @@ namespace YeetCarAccidents.Infrastructure
 
 			for (int i = 1; i <= PageInfo.PageCount; i++)
             {
-				_output.Append( //conditionally add active state
-					i == PageInfo.CurrentPage ? "<li class=\"page-item active\">" : "<li class=\"page-item\">"
-					);
-				_output.Append(
-					$"<a class=\"page-link\" href={helper.Action(PageAction, new { pageNum = i })}>{i}</a></li>"
-					);
+				if (i == 1 || i == PageInfo.CurrentPage || i == PageInfo.CurrentPage - 1 || i == PageInfo.CurrentPage - 2 || i == PageInfo.CurrentPage + 1 ||i == PageInfo.CurrentPage + 2 || i == PageInfo.CurrentPage + 3 || i == PageInfo.CurrentPage + 4 || i == PageInfo.PageCount)
+                {
+					if (i == 1 && (PageInfo.CurrentPage != 1 && PageInfo.CurrentPage != 2 && PageInfo.CurrentPage != 3))
+                    {
+						_output.Append( //conditionally add active state
+							i == PageInfo.CurrentPage ? "<li class=\"page-item active\">" : "<li class=\"page-item\">"
+							);
+						_output.Append(
+							$"<a class=\"page-link\" href={helper.Action(PageAction, new { pageNum = i })}>{i}</a></li><li class=\"page-item\"><a class=\"page-link\">……</a></li>"
+							);
+					}
+					else if(i == PageInfo.PageCount && PageInfo.CurrentPage != PageInfo.PageCount - 1 && PageInfo.CurrentPage != PageInfo.PageCount - 2 && PageInfo.CurrentPage != PageInfo.PageCount - 3 && PageInfo.CurrentPage != PageInfo.PageCount - 4 && PageInfo.CurrentPage != PageInfo.PageCount - 5)
+                    {
+						_output.Append("<li class=\"page-item\"><a class=\"page-link\">……</a></li>");
+						_output.Append( //conditionally add active state
+							i == PageInfo.CurrentPage ? "<li class=\"page-item active\">" : "<li class=\"page-item\">"
+							);
+						_output.Append(
+							$"<a class=\"page-link\" href={helper.Action(PageAction, new { pageNum = i })}>{i}</a></li>"
+							);
+					}
+                    else
+                    {
+						_output.Append( //conditionally add active state
+							i == PageInfo.CurrentPage ? "<li class=\"page-item active\">" : "<li class=\"page-item\">"
+							);
+						_output.Append(
+							$"<a class=\"page-link\" href={helper.Action(PageAction, new { pageNum = i })}>{i}</a></li>"
+							);
+					}
+
+				}
+
             }
 			_output.Append("</ul></nav>");
 
