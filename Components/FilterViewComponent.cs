@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using YeetCarAccidents.Data;
 
 namespace YeetCarAccidents.Components
@@ -18,6 +19,7 @@ namespace YeetCarAccidents.Components
 		{
 			//Get all the distinct counties from all crashes
 			var counties = _repo.Location
+                .AsNoTracking()
                 .Select(l => l.County)
                 .Distinct()
                 .OrderBy(l => l);

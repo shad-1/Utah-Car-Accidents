@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CoordinateSharp" Version="2.12.1.1" />
+    <PackageReference Include="CoordinateSharp" Version="2.13.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.23" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.21" />
@@ -26,5 +26,11 @@
 
   <ItemGroup>
     <None Remove="Microsoft.EntityFrameworkCore" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 </Project>

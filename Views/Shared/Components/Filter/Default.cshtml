@@ -13,9 +13,9 @@
         </div>
     *@
     <div>
-        <a class="filter-item @(county ==  ViewBag.SelectedCounty ? "active" : "")" asp-controller="Home" asp-action="Index" asp-route-countyegory="@county" asp-route-pageNum="1">@county</a>
+        <a class="filter-item @(county ==  ViewBag.SelectedCounty ? "active" : "")" asp-route="Dashboard" asp-route-county="@county" asp-route-pageNum="1">@county</a>
     </div>
 }
 <div class="">
-    <a class="my-4" asp-controller="Home" asp-action="Index" asp-route-countyegory="All" asp-route-pageNum="1">Reset</a>
+    <a class="my-4" asp-route="Dashboard" asp-route-county="All" asp-route-pageNum="1">Reset</a>
 </div>

@@ -51,7 +51,7 @@ namespace YeetCarAccidents.Infrastructure
 							$"<a class=\"page-link\" href={helper.Action(PageAction, new { pageNum = i })}>{i}</a></li><li class=\"page-item\"><a class=\"page-link\">……</a></li>"
 							);
 					}
-					else if(i == PageInfo.PageCount && PageInfo.CurrentPage != PageInfo.PageCount - 1 && PageInfo.CurrentPage != PageInfo.PageCount - 2 && PageInfo.CurrentPage != PageInfo.PageCount - 3 && PageInfo.CurrentPage != PageInfo.PageCount - 4 && PageInfo.CurrentPage != PageInfo.PageCount - 5)
+					else if(i == PageInfo.PageCount && PageInfo.CurrentPage != PageInfo.PageCount - 1 && PageInfo.CurrentPage != PageInfo.PageCount - 2 && PageInfo.CurrentPage != PageInfo.PageCount - 3 && PageInfo.CurrentPage != PageInfo.PageCount - 4 && PageInfo.CurrentPage != PageInfo.PageCount - 5) //todo: clean up these 
                     {
 						_output.Append("<li class=\"page-item\"><a class=\"page-link\">……</a></li>");
 						_output.Append( //conditionally add active state

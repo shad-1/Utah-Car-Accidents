@@ -38,20 +38,21 @@ namespace YeetCarAccidents.Controllers
         [Route("Home/Dashboard")]
         [Route("Dashboard/{County}")]
         [Route("Home/Dashboard/{County}")]
-        [Route("Dashboard/{County}/{pageNum}")]
+        [Route("Dashboard/{County}/{pageNum}", Name = "Dashboard")]
         [Route("Home/Dashboard/{County}/{pageNum}")]
         [HttpGet]
-        public async Task<IActionResult> Dashboard(string County = "All", int pageNum = 1)
+        public async Task<IActionResult> Dashboard(string county = "All", int pageNum = 1)
         {
             const int cardsPerPage = 10;
             var crashes = await _repo.Crashes
+                .Include("Location")
+                .Where(c => c.Location.County.ToLower() == county.ToLower() || county.ToLower() == "all")
                 .OrderByDescending(crash => crash.DateTime)
                 .Skip((pageNum -1) * cardsPerPage)
                 .Take(cardsPerPage)
-                .Include("Location")
                 .ToListAsync();
 
-            var location = await _repo.Location.Take(cardsPerPage * 3).ToListAsync(); //todo: add location filtering
+            var location = await _repo.Location.Take(cardsPerPage * 3).AsNoTracking().ToListAsync(); //todo: add location filtering
 
             var vm = new DashboardViewModel
             {
