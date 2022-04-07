@@ -26,18 +26,22 @@
         <div class="chip-container">
             @foreach (PropertyInfo prop in Model.GetType().GetProperties())
             {
-                    @*todo: format this with colors. *@
+                @*todo: format this with colors. *@
                 if (prop.PropertyType == typeof(bool) && prop.Equals(true))
                 {
-                <div class="btn btn-disabled">
-                    @prop
-                </div>
+                    <div class="btn btn-disabled">
+                        @prop
+                    </div>
                 }
             }
         </div>
-        <div class="btn-group align-baseline">
-            <a class="btn btn-small btn-warning" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.CrashId">Edit</a>
-            <a class="btn btn-small btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@Model.CrashId">Delete</a>
-        </div>
+        @if (ViewBag.IsAdmin)
+        {
+            //ONLY SHOW IF ADMIN
+            <div class="btn-group align-baseline">
+                <a class="btn btn-small btn-warning" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.CrashId">Edit</a>
+                <a class="btn btn-small btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@Model.CrashId">Delete</a>
+            </div>
+        }
     </div>
 </div>

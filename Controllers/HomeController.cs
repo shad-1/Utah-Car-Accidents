@@ -43,6 +43,8 @@ namespace YeetCarAccidents.Controllers
         [HttpGet]
         public async Task<IActionResult> Dashboard(string county = "All", int pageNum = 1)
         {
+            //Check if user is an admin
+            ViewBag.IsAdmin = HttpContext.User.IsInRole("Writer");
             const int cardsPerPage = 10;
             var crashes = await _repo.Crashes
                 .Include("Location")
@@ -83,7 +85,7 @@ namespace YeetCarAccidents.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        //TEST
+        //***************************************DON'T FORGET TO REMOVE*************************************************
         [Route("SuperSecret")]
         [Route("Home/SuperSecret")]
         [HttpGet]
@@ -94,6 +96,7 @@ namespace YeetCarAccidents.Controllers
             ViewBag.isAdmin = isAdmin;
             return View();
         }
+        //*****************************************************************************************************************
         //COOKIE SECTION
 
         [Route("MapCrash")]
@@ -110,7 +113,7 @@ namespace YeetCarAccidents.Controllers
             return View(c);
         }
 
-
+        //************************************TO BE REMOVED LATER************************************************************
         [Route("Privacy")]
         [Route("Home/Admin")]
         [HttpGet]
@@ -127,7 +130,7 @@ namespace YeetCarAccidents.Controllers
             //};
             //return View(c);
         }
-
+        //**************************************************************************************************************************
         [Route("Details")]
         [Route("Home/Details")]
         [HttpGet]
@@ -151,6 +154,7 @@ namespace YeetCarAccidents.Controllers
 
         [Route("Home/CrashChange")]
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CrashChange(Crash c)
         {
             if (ModelState.IsValid)
@@ -178,6 +182,7 @@ namespace YeetCarAccidents.Controllers
         [Route("Edit")]
         [Route("Home/Edit")]
         [HttpGet]
+        [Authorize(Roles ="Writer")]
         public async Task<IActionResult> Edit(int crashid)
         {
             ViewBag.Location = await _repo.Location.ToListAsync();
@@ -196,6 +201,7 @@ namespace YeetCarAccidents.Controllers
         [Route("Delete")]
         [Route("Home/Delete")]
         [HttpGet]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete(int crashid)
         {
             var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
@@ -204,6 +210,7 @@ namespace YeetCarAccidents.Controllers
 
         [Route("Delete")]
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete(Crash crash)
         {
             var c = await _repo.Crashes.SingleAsync(x => x.CrashId == crash.CrashId);
