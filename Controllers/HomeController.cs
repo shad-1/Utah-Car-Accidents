@@ -152,19 +152,6 @@ namespace YeetCarAccidents.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        //*************************************************DELETE BEFORE DEPLOYMENT*****************************************
-        //TEST
-        [Route("SuperSecret")]
-        [Route("Home/SuperSecret")]
-        [HttpGet]
-        public IActionResult SuperSecret()
-        {
-            bool isAdmin = HttpContext.User.IsInRole("Writer");
-            ViewBag.isAdmin = isAdmin;
-            return View();
-        }
-        //******************************************************************************************************************
-        //COOKIE SECTION
 
         [Route("MapCrash")]
         [Route("Home/MapCrash")]
@@ -219,6 +206,7 @@ namespace YeetCarAccidents.Controllers
         [Route("CrashChange")]
         [Route("Home/CrashChange")]
         [HttpGet]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CrashChange()
         {
             ViewBag.Location = await _repo.Location.ToListAsync();
