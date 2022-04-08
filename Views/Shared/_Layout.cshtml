@@ -12,13 +12,14 @@
 <body>
     @*Loading spinner*@
     <div id="loader" align="center">
-        <img src="~/img/loading.gif" alt="" />
+        <img src="~/img/loader.gif" alt="" />
     </div>
-    <script type="text/javascript">var loading;
+    <script type="text/javascript">var loading, container, footer;
         function ShowProgress(clicked = false) {
             loading = document.getElementById("loader");
             if (clicked) {
-                container = document.getElementsByClassName("container")[1]
+                container = document.getElementsByClassName("container")[1].style.display = "none";
+                footer = document.getElementsByTagName("footer")[0].style.display = "none";
                 loading.style.display = "flex";
 
             }
@@ -48,7 +49,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Crash Info</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin">Admin</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin" OnClick="ShowProgress(true);">Admin</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-route="Dashboard" asp-route-county="All" asp-route-pageNum="1" OnClick="ShowProgress(true);">Dashboard</a>
@@ -75,6 +76,8 @@
     <script type="text/javascript">window.onload = function () {
             setTimeout(function () {
                 loading.style.display = "none";
+                container.style.display = "block";
+                footer.style.display = "block";
             }, 0);
         };</script>
 

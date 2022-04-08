@@ -20,20 +20,44 @@ main {
 .h-vh {
     height: var(--body-height);
 }
-
+.f-small {
+    font-size: .8rem;
+}
 .f-1_half {
     font-size: 1.5rem;
 }
 .f-3 {
-    font-size 3rem;
+    font-size: 3rem;
 }
-
+.grid {
+    display: grid;
+    grid-template-rows: min-content min-content;
+    grid-template-columns: min-content min-content min-content;
+}
+.top-row {
+    grid-row: 1/2;
+}
+.bottom-row {
+    grid-row: 2/3;
+}
+    .bottom-row.text-center {
+        padding: 0 .5rem;
+    }
+.right-col {
+    grid-column: 3/4;
+}
+.crash-severity {
+    position: absolute;
+    left: 45%;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+}
 .filter-item {
-    font-size: 1.3rem;
+    font-size: 1.0rem;
     font-weight: 400;
     color: var(--dark);
 }
-
     .filter-item:hover, .filter-item.active {
         text-decoration: none;
         color: var(--cyan);
@@ -41,17 +65,38 @@ main {
 
 .card-heading {
     font-weight: 400;
-    font-size: 1.25 rem;
+    font-size: 1.25rem;
 }
 
-.align-baseline {
-    align-content: baseline;
+.card-base-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    align-items: self-end;
 }
+.align-baseline {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: baseline;
+    height: fit-content;
+}
+    .align-baseline * {
+        height: fit-content;
+        margin-left: .5rem;
+    }
 
 .chip-container {
-    disply: flex;
+    display: flex;
     flex-wrap: wrap;
     padding-right: 4rem;
+    justify-content: flex-start;
+}
+
+.tag-chip {
+    margin-top: .5rem;
+    margin-left: .5rem;
 }
 
 /* Loading Spinner */
