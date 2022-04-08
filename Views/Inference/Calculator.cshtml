@@ -1,0 +1,186 @@
+﻿@model CrashData
+
+<form method="post" asp-controller="Inference" asp-action="Test">
+    <div class="form-group">
+        <label asp-for="MilePoint">MilePoint:</label>
+        <input class="form-control" asp-for="MilePoint" />
+        <label asp-for="Work_zone_related">In a Construction Zone:</label>
+        <select class="form-control" asp-for="Work_zone_related">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Pedestrian_involved">Pedestrian Involved:</label>
+        <select class="form-control" asp-for="Pedestrian_involved">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Bicyclist_involved">Bicyclist Involved:</label>
+        <select class="form-control" asp-for="Bicyclist_involved">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Motorcycle_involved">Motorcyclist Involved:</label>
+        <select class="form-control" asp-for="Motorcycle_involved">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Improper_restraint">Seatbelt Not Used Properly:</label>
+        <select class="form-control" asp-for="Improper_restraint">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Unrestrained">Seatbelt Not Used:</label>
+        <select class="form-control" asp-for="Unrestrained">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Wild_animal_related">Wild Animal Involved:</label>
+        <select class="form-control" asp-for="Wild_animal_related">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Domestic_animal_related">Domestic Animal Involved:</label>
+        <select class="form-control" asp-for="Domestic_animal_related">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Overturn_rollover">Vehicle Rolled Over:</label>
+        <select class="form-control" asp-for="Overturn_rollover">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Commercial_motor_veh_involved">Commercial Vehicle Involved:</label>
+        <select class="form-control" asp-for="Commercial_motor_veh_involved">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Teenage_driver_involved">Teenager Driver Involved:</label>
+        <select class="form-control" asp-for="Teenage_driver_involved">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Older_driver_involved">Elderly Driver Involved:</label>
+        <select class="form-control" asp-for="Older_driver_involved">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Night_dark_condition">Night Time:</label>
+        <select class="form-control" asp-for="Night_dark_condition">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Single_vehicle">Multiple Vehicles Involved:</label>
+        <select class="form-control" asp-for="Single_vehicle">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Distracted_driving">Distracted Driver:</label>
+        <select class="form-control" asp-for="Distracted_driving">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Drowsy_driving">Drowsy Driver:</label>
+        <select class="form-control" asp-for="Drowsy_driving">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Roadway_departure">Vehicle Left The Road:</label>
+        <select class="form-control" asp-for="Roadway_departure">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label asp-for="Month">Month:</label>
+        <select class="form-control" asp-for="Month">
+            <option selected="selected" value="">Please select</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
+        <label asp-for="Day">Month Day:</label>
+        <input class="form-control" asp-for="Day" />
+        <label asp-for="Year">Year:</label>
+        <input class="form-control" asp-for="Year" />
+        <select class="form-control" asp-for="Hour">
+            <option selected="selected" value="">Please select</option>
+            <option value="0">12 AM</option>
+            <option value="1">1 AM</option>
+            <option value="2">2 AM</option>
+            <option value="3">3 AM</option>
+            <option value="4">4 AM</option>
+            <option value="5">5 AM</option>
+            <option value="6">6 AM</option>
+            <option value="7">7 AM</option>
+            <option value="8">8 AM</option>
+            <option value="9">9 AM</option>
+            <option value="10">10 AM</option>
+            <option value="11">11 AM</option>
+            <option value="12">12 PM</option>
+            <option value="13">1 PM</option>
+            <option value="14">2 PM</option>
+            <option value="15">3 PM</option>
+            <option value="16">4 PM</option>
+            <option value="17">5 PM</option>
+            <option value="18">6 PM</option>
+            <option value="19">7 PM</option>
+            <option value="20">8 PM</option>
+            <option value="21">9 PM</option>
+            <option value="22">10 PM</option>
+            <option value="23">11 PM</option>
+        </select>
+        <label asp-for="Minutes">Minute The Accident Occured:</label>
+        <input class="form-control" asp-for="Minutes" />
+        <label class="form-check-input" asp-for="Route_89">
+            <input type="radio" asp-for="Route_89" name="Routes" value=@(1) />Occured on Route 89
+            <input type="hidden" asp-for="Route_89" value=@(0)>
+        </label>
+        <label class="form-check-input" asp-for="Route_Other">
+            <input type="radio" asp-for="Route_Other" name="Routes" value=@(1)>Occured on Other Route
+            <input type="hidden" asp-for="Route_Other" value=@(0)>
+        </label>
+        <label asp-for="Main_road_name_Other">On Main St or State St:</label>
+        <select class="form-control" asp-for="Main_road_name_Other">
+            <option selected="selected" value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+        <label class="form-check-input" asp-for="City_SALT_LAKE_CITY">
+            <input type="radio" asp-for="City_SALT_LAKE_CITY" name="Cities" value=@(1) />In Salt Lake City:
+            <input type="hidden" asp-for="City_SALT_LAKE_CITY" value=@(0)>
+        </label>
+        <label class="form-check-input" asp-for="City_WEST_VALLEY_CITY">
+            <input type="radio" asp-for="City_WEST_VALLEY_CITY" name="Cities" value=@(1) />In West Valley City:
+            <input type="hidden" asp-for="City_WEST_VALLEY_CITY" value=@(0)>
+        </label>
+        <label class="form-check-input" asp-for="City_Other">
+            <input type="radio" asp-for="City_Other" name="Cities" value=@(1) />In Another City:
+            <input type="hidden" asp-for="City_Other" value=@(0)>
+        </label>
+
+        <label class="form-check-input" asp-for="County_name_SALT_LAKE">
+            <input type="radio" asp-for="County_name_SALT_LAKE" name="Counties" value=@(1) />In Salt Lake County:
+            <input type="hidden" asp-for="County_name_SALT_LAKE" value=@(0)>
+        </label>
+        <label class="form-check-input" asp-for="County_name_UTAH">
+            <input type="radio" asp-for="County_name_UTAH" name="Counties" value=@(1) />In Utah County:
+            <input type="hidden" asp-for="County_name_UTAH" value=@(0)>
+        </label>
+        <label class="form-check-input" asp-for="County_name_WEBER">
+            <input type="radio" asp-for="County_name_WEBER" name="Counties" value=@(1) />In Weber County:
+            <input type="hidden" asp-for="County_name_WEBER" value=@(0)>
+        </label>
+        <label class="form-check-input" asp-for="County_name_Other">
+            <input type="radio" asp-for="County_name_Other" name="Counties" value=@(1) />In Another County:
+            <input type="hidden" asp-for="County_name_Other" value=@(0)>
+        </label>
+    </div>
+    <button type="submit">Sumbit</button>
+
+</form>
