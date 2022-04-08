@@ -1,19 +1,42 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
+<center>
+    <h1 class="display-4">Life Is A Highway--Drive With Caution!</h1>
 
-<div>
-    <!--PICTURE OF SMILING CONSTRUCTION WORKERS OR OTHER HAPPY IMAGE-->
-</div>
+    <img class="mx-auto" src="~/img/utah-highway-12.jpeg" width="1100" height="500" style="padding-bottom:30px" />
+</center>
 
-<div>
-    <h3>HOOK PARAGRAPH</h3>
-    <p>Utah, wake up to the truth. There is more to causing accidents than drunk driving.
-    The number of car crashes occuring have increased since last time we checked. Our statiticians
-    tell us that this is bad and we believe them.</p>
-    <p>This website will convince you to take off your tinfoil hat and wake up to the truth.
-    Driving a two ton box of metal is dangerous. Be safe and don't drive distracted.</p>
-    <h3>PURPOSE OF WEBSITE PARAGRAPH</h3>
-    <p>This website will bring the light into your eyes by revealing what actions can lead to a more
-    severe crash. You will also see a record of crashes that we techinically didn't steal.</p>
+<p class="lead">
+    Driving is an everyday part of life, and should be enjoyed! However, safety while driving is something that should not be forgotten. We
+    have collected a variety of resources to increase your knowledge of road safety. Learn more about the factors that increase the chances of a fatality,
+    explore the vast database of accident information in Utah, and see how different locations can influence the chances of being in an accident.
+</p>
+
+<div class="card card-group border-0">
+    <div class="card">
+        <img class="card-img-top" src="~/img/muhammad-daudy-4eeG4Mn0HVY-unsplash.jpg" height="400" />
+        <div class="card-body">
+            <h4 class="card-title">FACTORS BEHIND FATALITIES</h4>
+            <p class="card-text">
+                Believe it or not, distracted driving is not the only thing that can increase the severity of a car accident. Learn more about what factors--
+                and people you should be aware of when you are behind the wheel.
+            </p>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Causes">Learn More</a>
+        </div>
+    </div>
+    <span style="padding-left:50px"></span>
+    <div class="card card">
+        <img class="card-img-top" src="~/img/other.jpg" height="400" />
+        <div class="card-body">
+            <h4 class="card-title">CRASH INFORMATION</h4>
+            <p class="card-text">
+
+                Ready to learn the truth about accidents in Utah? Which locations have the most crashes? Our database of information is available to search and view information about car accidents
+                that happened in the years 2016-2019.
+            </p>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Dashboard">Explore Information</a>
+
+        </div>
+    </div>
 </div>
