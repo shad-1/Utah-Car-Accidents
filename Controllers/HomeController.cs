@@ -174,24 +174,6 @@ namespace YeetCarAccidents.Controllers
             return View(mvm);
         }
 
-
-        [Route("Privacy")]
-        [Route("Home/Admin")]
-        [HttpGet]
-        public async Task<IActionResult> Admin()
-        {
-
-            var crashes = await _repo.Crashes.Include("Location").Take(15).ToListAsync();
-            return View(crashes);
-
-            //var crashes = await _repo.Crashes.Take(15).ToListAsync();
-            //var c = new AdminViewModel
-            //{
-            //    Crashes = crashes
-            //};
-            //return View(c);
-        }
-
         [Route("Details")]
         [Route("Home/Details")]
         [HttpGet]
