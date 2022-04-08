@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -59,6 +60,9 @@ namespace YeetCarAccidents.Models
         public bool? Drowsy { get; set; }
         [Column("ROADWAY_DEPARTURE")]
         public bool? RoadwayDeparture { get; set; }
+
+        [NotMapped]
+        public List<string>? Tags { get; set; }
     }
 }
 

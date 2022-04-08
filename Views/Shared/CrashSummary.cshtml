@@ -9,35 +9,45 @@
 
 
     <div class="d-flex justify-content-between my-2 card-heading">
-        <div>@Model.Location.Route - @Model.Location.Milepoint.ToString()</div>
+        <div class="grid">
+            <span class="f-small top-row">Route</span>
+            <span class="bottom-row">@Model.Location.Route</span>
+            <span class="bottom-row text-center">-</span>
+            <span class="f-small top-row right-col">Mile</span>
+            <span class="bottom-row">@Model.Location.Milepoint.ToString()</span>
+        </div>
+        <div class="crash-severity text-center">
+           <span class="f-small">Severity</span><span class="f-3">@Model.Severity</span>
+        </div>
         <div>@(Model.Location.RoadName ?? " ")</div>
     </div>
 
     <div class="d-flex justify-content-between my-2">
         <div>@Model.DateTime</div>
-        <div>@(Model.Location.City ?? " "), @(Model.Location.County ?? " ")</div>
+        <div>@(Model.Location.City != "" ? Model.Location.County != "" ? Model.Location.City + ", " + Model.Location.County : Model.Location.City : Model.Location.County)</div>
     </div>
 
-    <div class="p-absolute text-center f-3">
-        @Model.Severity
-    </div>
-
-    <div class="d-flex justify-content-betwen">
+    <div class="card-base-row">
         <div class="chip-container">
-            @foreach (PropertyInfo prop in Model.GetType().GetProperties())
-            {
-                    @*todo: format this with colors. *@
-                if (prop.PropertyType == typeof(bool) && prop.Equals(true))
-                {
-                <div class="btn btn-disabled">
-                    @prop
-                </div>
+     
+            @* Dynamically generate chips showing the various boolean features of each crash*@
+            @{
+                string[] classes = { "btn-outline-secondary", "btn-outline-info", "btn-outline-warning", "btn-outline-danger", "btn-outline-primary", "btn-outline-success", "btn-outline-dark"};
+                Random random = new Random();
+                int i = random.Next(5) ;
+             }
+            @foreach (string tag in Model.Tags)
+                {//dynamically apply classes ;)
+                <span class="btn btn-sm btn-disabled disabled tag-chip @classes[i]">@tag</span>
+                    if (i < classes.Length - 1)
+                        i++;
+                    else
+                        i = 0;
                 }
-            }
         </div>
-        <div class="btn-group align-baseline">
-            <a class="btn btn-small btn-warning" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.CrashId">Edit</a>
-            <a class="btn btn-small btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@Model.CrashId">Delete</a>
+        <div class="align-baseline">
+            <a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.CrashId">Edit</a>
+            <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@Model.CrashId">Delete</a>
         </div>
     </div>
 </div>

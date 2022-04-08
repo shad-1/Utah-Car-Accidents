@@ -9,6 +9,8 @@ using YeetCarAccidents.Models;
 using YeetCarAccidents.Models.ViewModels;
 using YeetCarAccidents.Data;
 using CoordinateSharp;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace YeetCarAccidents.Controllers
 {
@@ -52,6 +54,26 @@ namespace YeetCarAccidents.Controllers
                 .ToListAsync();
 
             var location = await _repo.Location.Take(cardsPerPage * 3).AsNoTracking().ToListAsync(); //todo: add location filtering
+
+            // Loop through true properties on each crash and add them to the Tags
+            foreach (Crash crash in crashes)
+            {
+                if (crash.Tags == null)
+                    crash.Tags = new List<string>();
+
+                foreach (PropertyInfo prop in crash.GetType().GetProperties())
+                {
+                    if (prop.PropertyType == typeof(bool?))
+                    {
+                        var value = prop.GetValue(crash);
+                        if (value.Equals(true))
+                        {
+                            crash.Tags.Add(prop.Name);
+                        }
+                    }
+                }
+            }
+            // End property tags
 
             var vm = new DashboardViewModel
             {
