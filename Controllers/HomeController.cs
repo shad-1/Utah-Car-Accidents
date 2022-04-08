@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,23 +38,43 @@ namespace YeetCarAccidents.Controllers
         }
         [Route("Dashboard")]
         [Route("Home/Dashboard")]
-        [Route("Dashboard/{County}")]
-        [Route("Home/Dashboard/{County}")]
-        [Route("Dashboard/{County}/{pageNum}", Name = "Dashboard")]
-        [Route("Home/Dashboard/{County}/{pageNum}")]
+        [Route("Dashboard{pageNum}")]
+        [Route("Home/Dashboard/{pageNum}", Name = "Dashboard")]
+        [Route("Dashboard{pageNum}/{filter?}")]
+        [Route("Home/Dashboard/{pageNum}/{filter?}")]
         [HttpGet]
-        public async Task<IActionResult> Dashboard(string county = "All", int pageNum = 1)
+        public async Task<IActionResult> Dashboard(int pageNum = 1, FilterInfo filter = null)
         {
             const int cardsPerPage = 10;
-            var crashes = await _repo.Crashes
-                .Include("Location")
-                .Where(c => c.Location.County.ToLower() == county.ToLower() || county.ToLower() == "all")
-                .OrderByDescending(crash => crash.DateTime)
-                .Skip((pageNum -1) * cardsPerPage)
-                .Take(cardsPerPage)
-                .ToListAsync();
+            var crashes = new List<Crash>();
 
-            var location = await _repo.Location.Take(cardsPerPage * 3).AsNoTracking().ToListAsync(); //todo: add location filtering
+
+            if (filter is null)
+            {
+                //filter null check
+                //ViewBag.SelectedCounty = filter.County;
+
+                crashes = await _repo.Crashes
+                    .Include("Location")
+                    .OrderByDescending(crash => crash.DateTime)
+                    .Skip((pageNum - 1) * cardsPerPage)
+                    .Take(cardsPerPage)
+                    .ToListAsync();
+            }
+            else // We have a filter!
+            {
+                if (filter.County != null)
+                {
+                    ViewBag.SelectedCounty = filter.County;
+                }
+                crashes = await _repo.Crashes
+                    .Include("Location")
+                    .OrderByDescending(crash => crash.DateTime)
+                    .Skip((pageNum - 1) * cardsPerPage)
+                    .Take(cardsPerPage)
+                    .ToListAsync();
+            }
+            //var location = await _repo.Location.Take(cardsPerPage * 3).AsNoTracking().ToListAsync(); //todo: add location filtering
 
             // Loop through true properties on each crash and add them to the Tags
             foreach (Crash crash in crashes)
@@ -78,7 +99,8 @@ namespace YeetCarAccidents.Controllers
             var vm = new DashboardViewModel
             {
                 Crashes = crashes,
-                Locations = location,
+                //Locations = location,
+                Filter = filter ?? new FilterInfo(),
                 PageInfo = new PageInfo
                 {
                     Items = crashes.Count(),

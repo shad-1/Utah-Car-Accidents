@@ -14,9 +14,8 @@
         <div class="d-flex flex-column h-100 justify-content-between">
             @* Create space between the pagination and categories*@
             <div>
-            @*TODO: filter on multiple criteria?*@
-                <h4 class="mt-4 mb-2">Filter</h4>
-                <vc:filter></vc:filter>
+                @*<h4 class="mt-4 mb-2">Filter</h4>*@
+                <vc:filter filter="@Model.Filter"></vc:filter>
             </div>
 
             <div class="page-navigation" page-info="@Model.PageInfo" page-action="Dashboard"></div>

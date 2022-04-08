@@ -1,21 +1,31 @@
 ﻿@{
-    @model IEnumerable<string>;
+    @model FilterInfo;
+    FilterViewModel FilterBuilder = ViewBag.FilterViewModel;
 }
+<form method="get" asp-route="Default" asp-route-filter="@Model">
 
-@foreach (var county in Model)
-{
-    @*
-            @todo: use checkboxes for style!
-
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="@county\-filter" asp-controller="Home" asp-action="Index">
-            <label class="form-check-label" for="@county\-filter">@county</label>
-        </div>
-    *@
-    <div>
-        <a class="filter-item @(county ==  ViewBag.SelectedCounty ? "active" : "")" asp-route="Dashboard" asp-route-county="@county" asp-route-pageNum="1">@county</a>
+    <div class="form-group">
+        <label asp-for="@Model.County">County</label>
+        <select class="form-control" asp-for="County">
+            <option selected="@(Model.County is null ? "selected" : "")" value="">Please select</option>
+            @foreach (var county in FilterBuilder.Counties)
+                {
+                    if(Model.County == county)
+                {
+                    <option selected="selected" asp-for="@Model.County">
+                        @county
+                    </option>
+                }
+                    else
+                {
+                    <option asp-for="@Model.County">
+                        @county
+                    </option>
+                }
+                
+        }
+        </select>
     </div>
-}
-<div class="">
-    <a class="my-4" asp-route="Dashboard" asp-route-county="All" asp-route-pageNum="1">Reset</a>
-</div>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
