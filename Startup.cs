@@ -35,14 +35,14 @@ namespace YeetCarAccidents
             services.AddSingleton<InferenceSession>(
                 new InferenceSession("wwwroot/yeet.onnx"));
 
-            string endpoint = Environment.GetEnvironmentVariable("ConnectionString", EnvironmentVariableTarget.Process);
+            //string endpoint = Environment.GetEnvironmentVariable("ConnectionString", EnvironmentVariableTarget.Process);
 
             //Configuration["ConnectionStrings:DefaultConnection"])
             services.AddDbContext<CrashContext>(options =>
-                options.UseMySql(endpoint));
+                options.UseMySql("server=yeetcrashes-2.cbntnmyydbq7.us-east-1.rds.amazonaws.com;port=3306;database=YeetCrashes;user=rootkit;password=sparky43"));
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(endpoint));
+                options.UseMySql("server=yeetcrashes-2.cbntnmyydbq7.us-east-1.rds.amazonaws.com;port=3306;database=YeetCrashes;user=rootkit;password=sparky43"));
             //Configuration.GetConnectionString("DefaultConnection")
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()

@@ -52,8 +52,6 @@ namespace YeetCarAccidents.Controllers
             bool isAdmin = HttpContext.User.IsInRole("Writer");
             ViewBag.isAdmin = isAdmin;
 
-            else // We have a filter!
-            {
                 crashes = await _repo.Crashes
                     .Take(500)
                     .Include("Location")
@@ -63,7 +61,11 @@ namespace YeetCarAccidents.Controllers
                 //Giant filtering!!!!
                 if (filter.County != null && filter.City != null && filter.Month != null && filter.Year != null)
                 {
-
+                    crashes = await _repo.Crashes
+                    .Where(c => c.Location.County != null && c.Location.County == filter.County && c.Location.City != null && c.Location.City == filter.City && c.DateTime != null && c.DateTime.Value.Month == filter.Month && c.DateTime.Value.Year == filter.Year)
+                    .Include("Location")
+                    .OrderByDescending(crash => crash.DateTime)
+                    .ToListAsync();
                 }
                 else if (filter.County != null && filter.City != null && filter.Month != null)
                 {
@@ -127,22 +129,20 @@ namespace YeetCarAccidents.Controllers
                     .ToListAsync();
                 }
                
-                if (filter.County != null)
+
                     crashes = crashes
                     .Where(c => c.Location.County != null && c.Location.County == filter.County)
                     .ToList();
 
-                if (filter.City != null)
+    
                     crashes = crashes
                     .Where(c => c.Location.City != null && c.Location.City == filter.City)
                     .ToList();
 
-                if (filter.Month != null)
                     crashes = crashes
                     .Where(c => c.DateTime != null && c.DateTime.Value.Month == filter.Month)
                     .ToList();
 
-                if (filter.Year != null)
                     crashes = crashes
                     .Where(c => c.DateTime != null && c.DateTime.Value.Year == filter.Year)
                     .ToList();
@@ -156,7 +156,7 @@ namespace YeetCarAccidents.Controllers
                 crashes = crashes.AsQueryable()
                     .Skip((pageNum - 1) * cardsPerPage)
                     .Take(cardsPerPage).ToList();
-            }
+            
             //var location = await _repo.Location.Take(cardsPerPage * 3).AsNoTracking().ToListAsync(); //todo: add location filtering
 
             // Loop through true properties on each crash and add them to the Tags
