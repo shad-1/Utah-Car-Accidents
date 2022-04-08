@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Change a Crash";
+}
+
+@model YeetCarAccidents.Models.Crash
+
+<h1>Add or Edit a Crash</h1>
+
+<a asp-controller="Home" asp-action="Admin" class="btn btn-primary">Back</a>
+<div>
+    <form method="post">
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><label asp-for="Severity">Severity:</label></td><td><input asp-for="Severity" /></td></tr>
+                <tr><td><label asp-for="DateTime">Date Time:</label></td><td><input asp-for="DateTime" /></td></tr>
+                <tr>
+                    <td><label asp-for="LocationID">Location:</label></td>
+                    <td>
+                        <select asp-for="LocationID">
+                            <option value="">Select a Location</option>
+                            @foreach (Location l in ViewBag.Location)
+                            {
+                                <option value="@l.LocationID">@l.RoadName - @l.City</option>
+                            }
+                        </select>
+                    </td>
+                </tr>
+                <tr><td><label asp-for="WorkZone">Workzone Related</label></td><td><select asp-for="WorkZone"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Pedestrian">Pedestrian Involved:</label></td><td><select asp-for="Pedestrian"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Bicyclist">Bicyclist Involved:</label></td><td><select asp-for="Bicyclist"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Motorcycle">Motorcycle Involved:</label></td><td><select asp-for="Motorcycle"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="ImproperRestraint">Improper Restraint:</label></td><td><select asp-for="ImproperRestraint"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Unrestrained">Unrestrained:</label></td><td><select asp-for="Unrestrained"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Dui">DUI:</label></td><td><select asp-for="Dui"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Intersection">Intersection Related:</label></td><td><select asp-for="Intersection"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="WildAnimal">Wild Animal Related:</label></td><td><select asp-for="WildAnimal"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="DomesticAnimal">Animal Related:</label></td><td><select asp-for="DomesticAnimal"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Rollover">Overturn Rollover:</label></td><td><select asp-for="Rollover"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Commercial">Commercial Morot Vehicle Involved:</label></td><td><select asp-for="Commercial"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Teenage">Teenage Driver Involved:</label></td><td><select asp-for="Teenage"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Older">Older Driver Involved:</label></td><td><select asp-for="Older"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Night">Night Dark Condition:</label></td><td><select asp-for="Night"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="SingleVehicle">Single Vehicle:</label></td><td><select asp-for="SingleVehicle"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Distracted">Distracted Driving:</label></td><td><select asp-for="Distracted"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="Drowsy">Drowsy Driving:</label></td><td><select asp-for="Drowsy"><option value="false">False</option><option value="true">True</option></select></td></tr>
+                <tr><td><label asp-for="RoadwayDeparture">Roadway Departure:</label></td><td><select asp-for="RoadwayDeparture"><option value="false">False</option><option value="true">True</option></select></td></tr>
+            </tbody>
+        </table>
+        <button type="submit">Submit</button>
+    </form>
+
+
+
+    @*<form method="post">
+            <div asp-validation-summary="All"></div>
+            <label asp-for="DateTime">Date Time:</label>
+            <input asp-for="DateTime" /><br />
+
+            <label asp-for="LocationID">Location:</label>
+            <select asp-for="LocationID">
+                <option value="">Select a Location</option>
+                @foreach (Location l in ViewBag.Location)
+                {
+                    <option value="@l.LocationID">@l.RoadName - @l.City</option>
+                }
+            </select><br />
+
+            <label asp-for="Severity">Severity:</label>
+            ><input asp-for="Severity" /><br />
+
+            <label asp-for="WorkZone">Workzone Related</label>
+            <select asp-for="WorkZone">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Pedestrian">Pedestrian Involved:</label>
+            <select asp-for="Pedestrian">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Bicyclist">Bicyclist Involved:</label>
+            <select asp-for="Bicyclist">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Motorcycle">Motorcycle Involved:</label>
+            <select asp-for="Motorcycle">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="ImproperRestraint">Improper Restraint:</label>
+            <select asp-for="ImproperRestraint">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Unrestrained">Unrestrained:</label>
+            <select asp-for="Unrestrained">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Dui">DUI:</label>
+            <select asp-for="Dui">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Intersection">Intersection Related:</label>
+            <select asp-for="Intersection">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="WildAnimal">Wild Animal Related:</label>
+            <select asp-for="WildAnimal">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="DomesticAnimal">Animal Related:</label>
+            <select asp-for="DomesticAnimal">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Rollover">Overturn Rollover:</label>
+            <select asp-for="Rollover">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Commercial">Commercial Motor Vehicle Involved:</label>
+            <select asp-for="Commercial">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Teenage">Teenage Driver Involved:</label>
+            <select asp-for="Teenage">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Older">Older Driver Involved:</label>
+            <select asp-for="Older">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Night">Night Dark Condition:</label>
+            <select asp-for="Night">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="SingleVehicle">Single Vehicle:</label>
+            <select asp-for="SingleVehicle">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Distracted">Distracted Driving:</label>
+            <select asp-for="Distracted">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="Drowsy">Drowsy Driving:</label>
+            <select asp-for="Drowsy">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <label asp-for="RoadwayDeparture">Roadway Departure:</label>
+            <select asp-for="RoadwayDeparture">
+                <option value="false">False</option>
+                <option value="true">True</option>
+            </select><br />
+
+            <button type="submit">Submit</button>
+        </form>*@
+</div>

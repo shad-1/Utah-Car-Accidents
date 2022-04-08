@@ -28,8 +28,11 @@ namespace YeetCarAccidents
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CrashContext>(options =>
+                options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
+                options.UseMySql(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
@@ -41,6 +44,8 @@ namespace YeetCarAccidents
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddScoped<ICrashRepository, EFCrashRepository>();
             services.Configure<IdentityOptions>(options =>
             {
                 // Default Password settings.
@@ -77,10 +82,20 @@ namespace YeetCarAccidents
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute(
+                //   name: "pagination",
+                //   pattern: "Dashboard/Page/{pageNum}",
+                //   defaults: new { controller = "Home", action = "Dashboard" }
+                //);
+
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}"
+                //);
+
+                endpoints.MapControllers();
                 endpoints.MapRazorPages();
+
             });
         }
     }

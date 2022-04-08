@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Delete a Crash";
+}
+
+@model YeetCarAccidents.Models.Crash;
+
+<h2>Delete Confirmation</h2>
+<h3>Are you sure you want to delete the record for the crash on @Model.DateTime </h3>
+@* at @Model.Location.RoadName in @Model.Location.City *@
+
+<form method="post" asp-controller="Home" asp-action="Delete">
+    <button type="submit">Delete</button>
+    <a asp-controller="Home" asp-action="Admin" class="btn btn-primary">Cancel</a>
+    <input type="hidden" asp-for="@Model.CrashId" />
+</form>

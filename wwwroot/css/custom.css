@@ -1,0 +1,116 @@
+﻿:root {
+    --body-height: calc(100vh - 67px - 57px - 60px); /*viewport - header - navbar - footer. Hacky, yes. But I don't want to rework all the asp.net default styling. */
+}
+body {
+    position: relative;
+}
+main {
+    min-height: 50vh;
+    position: relative;
+}
+
+.p-relative {
+    position: relative;
+}
+
+.h-min-content {
+    height: min-content;
+}
+
+.h-vh {
+    height: var(--body-height);
+}
+.f-small {
+    font-size: .8rem;
+}
+.f-1_half {
+    font-size: 1.5rem;
+}
+.f-3 {
+    font-size: 3rem;
+}
+.grid {
+    display: grid;
+    grid-template-rows: min-content min-content;
+    grid-template-columns: min-content min-content min-content;
+}
+.top-row {
+    grid-row: 1/2;
+}
+.bottom-row {
+    grid-row: 2/3;
+}
+    .bottom-row.text-center {
+        padding: 0 .5rem;
+    }
+.right-col {
+    grid-column: 3/4;
+}
+.crash-severity {
+    position: absolute;
+    left: 45%;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+}
+.filter-item {
+    font-size: 1.0rem;
+    font-weight: 400;
+    color: var(--dark);
+}
+    .filter-item:hover, .filter-item.active {
+        text-decoration: none;
+        color: var(--cyan);
+    }
+
+.card-heading {
+    font-weight: 400;
+    font-size: 1.25rem;
+}
+
+.card-base-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    align-items: self-end;
+}
+.align-baseline {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: baseline;
+    height: fit-content;
+}
+    .align-baseline * {
+        height: fit-content;
+        margin-left: .5rem;
+    }
+
+.chip-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 4rem;
+    justify-content: flex-start;
+}
+
+.tag-chip {
+    margin-top: .5rem;
+}
+    .tag-chip:not(:first-of-type) {
+    margin-left: .5rem;
+    }
+
+/* Loading Spinner */
+#loader {
+    width: 100vw;
+    height: calc(100vh - 57px);
+    background: #fff;
+    display: none;
+    top: 57px; /* navbar height */
+    position: absolute;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+

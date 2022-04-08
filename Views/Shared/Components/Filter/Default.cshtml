@@ -1,0 +1,31 @@
+﻿@{
+    @model FilterInfo;
+    FilterViewModel FilterBuilder = ViewBag.FilterViewModel;
+}
+<form method="get" asp-route="Default" asp-route-filter="@Model">
+
+    <div class="form-group">
+        <label asp-for="@Model.County">County</label>
+        <select class="form-control" asp-for="County">
+            <option selected="@(Model.County is null ? "selected" : "")" value="">Please select</option>
+            @foreach (var county in FilterBuilder.Counties)
+                {
+                    if(Model.County == county)
+                {
+                    <option selected="selected" asp-for="@Model.County">
+                        @county
+                    </option>
+                }
+                    else
+                {
+                    <option asp-for="@Model.County">
+                        @county
+                    </option>
+                }
+                
+        }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
