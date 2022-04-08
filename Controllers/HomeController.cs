@@ -261,5 +261,12 @@ namespace YeetCarAccidents.Controllers
         {
             return View();
         }
+
+        [Route("Home/Tableau")]
+        [HttpGet]
+        public IActionResult Tableau()
+        {
+            return View();
+        }
     }
 }

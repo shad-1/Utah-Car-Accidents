@@ -1,8 +1,20 @@
 ﻿@model CrashData
 
+<h1>Crash Severity Calculator</h1>
+<p class="lead">
+    Provide responses to the following questions to determine the predicted severity of a vehicle accident. The predictions are scored on the following
+    scale:
+    <br />
+    1- No Injury<br />
+    2- Possible Injury<br />
+    3- Suspected Minor Injury<br />
+    4- Suspected Serious Injury<br />
+    5- Fatal<br />
+</p>
+
 <form method="post" asp-controller="Inference" asp-action="Test">
     <div class="form-group">
-        <label asp-for="MilePoint">MilePoint:</label>
+        <label asp-for="MilePoint">Mile Point:</label>
         <input class="form-control" asp-for="MilePoint" />
         <label asp-for="Work_zone_related">In a Construction Zone:</label>
         <select class="form-control" asp-for="Work_zone_related">
@@ -105,10 +117,11 @@
             <option value="11">November</option>
             <option value="12">December</option>
         </select>
-        <label asp-for="Day">Month Day:</label>
+        <label asp-for="Day">Day:</label>
         <input class="form-control" asp-for="Day" />
         <label asp-for="Year">Year:</label>
         <input class="form-control" asp-for="Year" />
+        <label asp-for="Hour">Hour The Accident Occured:</label>
         <select class="form-control" asp-for="Hour">
             <option selected="selected" value="">Please select</option>
             <option value="0">12 AM</option>
@@ -137,50 +150,58 @@
             <option value="23">11 PM</option>
         </select>
         <label asp-for="Minutes">Minute The Accident Occured:</label>
-        <input class="form-control" asp-for="Minutes" />
-        <label class="form-check-input" asp-for="Route_89">
-            <input type="radio" asp-for="Route_89" name="Routes" value=@(1) />Occured on Route 89
-            <input type="hidden" asp-for="Route_89" value=@(0)>
-        </label>
-        <label class="form-check-input" asp-for="Route_Other">
-            <input type="radio" asp-for="Route_Other" name="Routes" value=@(1)>Occured on Other Route
-            <input type="hidden" asp-for="Route_Other" value=@(0)>
-        </label>
-        <label asp-for="Main_road_name_Other">On Main St or State St:</label>
+        <input class="form-control" asp-for="Minutes" /><br />
+
+        <label asp-for="Main_road_name_Other">Did It Occur On Main St or State St?</label>
         <select class="form-control" asp-for="Main_road_name_Other">
             <option selected="selected" value="0">No</option>
             <option value="1">Yes</option>
-        </select>
-        <label class="form-check-input" asp-for="City_SALT_LAKE_CITY">
-            <input type="radio" asp-for="City_SALT_LAKE_CITY" name="Cities" value=@(1) />In Salt Lake City:
-            <input type="hidden" asp-for="City_SALT_LAKE_CITY" value=@(0)>
-        </label>
-        <label class="form-check-input" asp-for="City_WEST_VALLEY_CITY">
-            <input type="radio" asp-for="City_WEST_VALLEY_CITY" name="Cities" value=@(1) />In West Valley City:
-            <input type="hidden" asp-for="City_WEST_VALLEY_CITY" value=@(0)>
-        </label>
-        <label class="form-check-input" asp-for="City_Other">
-            <input type="radio" asp-for="City_Other" name="Cities" value=@(1) />In Another City:
-            <input type="hidden" asp-for="City_Other" value=@(0)>
-        </label>
+        </select><br />
 
+        <label class="form-check-input">Did It Occur On Route 89?</label><br />
+        <label class="form-check-input" asp-for="Route_89">
+            <input type="radio" asp-for="Route_89" name="Routes" value=@(1) />Yes
+            <input type="hidden" asp-for="Route_89" value=@(0)>
+        </label><br />
+        <label class="form-check-input" asp-for="Route_Other">
+            <input type="radio" asp-for="Route_Other" name="Routes" value=@(1)>No
+            <input type="hidden" asp-for="Route_Other" value=@(0)>
+        </label><br /><br />
+
+        <label class="form-check-input">What City Did It Occur In?</label><br />
+        <label class="form-check-input" asp-for="City_SALT_LAKE_CITY">
+            <input type="radio" asp-for="City_SALT_LAKE_CITY" name="Cities" value=@(1) />Salt Lake City
+            <input type="hidden" asp-for="City_SALT_LAKE_CITY" value=@(0)>
+        </label><br />
+        <label class="form-check-input" asp-for="City_WEST_VALLEY_CITY">
+            <input type="radio" asp-for="City_WEST_VALLEY_CITY" name="Cities" value=@(1) />West Valley City
+            <input type="hidden" asp-for="City_WEST_VALLEY_CITY" value=@(0)>
+        </label><br />
+        <label class="form-check-input" asp-for="City_Other">
+            <input type="radio" asp-for="City_Other" name="Cities" value=@(1) />In Another City
+            <input type="hidden" asp-for="City_Other" value=@(0)>
+        </label><br /><br />
+
+
+        <label class="form-check-input">What County Did It Occur In?</label><br />
         <label class="form-check-input" asp-for="County_name_SALT_LAKE">
-            <input type="radio" asp-for="County_name_SALT_LAKE" name="Counties" value=@(1) />In Salt Lake County:
+            <input type="radio" asp-for="County_name_SALT_LAKE" name="Counties" value=@(1) />Salt Lake County
             <input type="hidden" asp-for="County_name_SALT_LAKE" value=@(0)>
-        </label>
+        </label><br />
         <label class="form-check-input" asp-for="County_name_UTAH">
-            <input type="radio" asp-for="County_name_UTAH" name="Counties" value=@(1) />In Utah County:
+            <input type="radio" asp-for="County_name_UTAH" name="Counties" value=@(1) />Utah County
             <input type="hidden" asp-for="County_name_UTAH" value=@(0)>
-        </label>
+        </label><br />
         <label class="form-check-input" asp-for="County_name_WEBER">
-            <input type="radio" asp-for="County_name_WEBER" name="Counties" value=@(1) />In Weber County:
+            <input type="radio" asp-for="County_name_WEBER" name="Counties" value=@(1) />Weber County
             <input type="hidden" asp-for="County_name_WEBER" value=@(0)>
-        </label>
+        </label><br />
         <label class="form-check-input" asp-for="County_name_Other">
-            <input type="radio" asp-for="County_name_Other" name="Counties" value=@(1) />In Another County:
+            <input type="radio" asp-for="County_name_Other" name="Counties" value=@(1) />In Another County
             <input type="hidden" asp-for="County_name_Other" value=@(0)>
-        </label>
+        </label><br />
+
     </div>
-    <button type="submit">Sumbit</button>
+    <button type="submit">Submit</button>
 
 </form>
