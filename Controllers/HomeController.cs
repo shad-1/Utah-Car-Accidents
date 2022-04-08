@@ -58,40 +58,66 @@ namespace YeetCarAccidents.Controllers
                     .OrderByDescending(crash => crash.DateTime)
                     .ToListAsync();
 
-                //Giant filtering!!!!
-                if (filter.County != null && filter.City != null && filter.Month != null && filter.Year != null)
-                {
-                    crashes = await _repo.Crashes
-                    .Where(c => c.Location.County != null && c.Location.County == filter.County && c.Location.City != null && c.Location.City == filter.City && c.DateTime != null && c.DateTime.Value.Month == filter.Month && c.DateTime.Value.Year == filter.Year)
-                    .Include("Location")
-                    .OrderByDescending(crash => crash.DateTime)
-                    .ToListAsync();
-                }
-                else if (filter.County != null && filter.City != null && filter.Month != null)
-                {
+            //Giant filtering!!!!
+            if (filter.County != null && filter.City != null && filter.Month != null && filter.Year != null)
+            {
+                crashes = await _repo.Crashes
+                .Where(c => c.Location.County != null && c.Location.County == filter.County && c.Location.City != null && c.Location.City == filter.City && c.DateTime != null && c.DateTime.Value.Month == filter.Month && c.DateTime.Value.Year == filter.Year)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
+            }
+            else if (filter.County != null && filter.City != null && filter.Month != null)
+            {
+                crashes = await _repo.Crashes
+                .Where(c => c.Location.County != null && c.Location.County == filter.County && c.Location.City != null && c.Location.City == filter.City && c.DateTime != null && c.DateTime.Value.Month == filter.Month)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
+            }
+            else if (filter.County != null && filter.City != null && filter.Year != null)
+            {
+                crashes = await _repo.Crashes
+                .Where(c => c.Location.County != null && c.Location.County == filter.County && c.Location.City != null && c.Location.City == filter.City && c.DateTime != null && c.DateTime.Value.Year == filter.Year)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
 
-                }
-                else if (filter.County != null && filter.City != null && filter.Year != null)
-                {
+            }
+            else if (filter.County != null && filter.City != null)
+            {
+                crashes = await _repo.Crashes
+                .Where(c => c.Location.County != null && c.Location.County == filter.County && c.Location.City != null && c.Location.City == filter.City)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
 
-                }
-                else if (filter.County != null && filter.City != null)
-                {
-
-                }
-                else if (filter.County != null && filter.Year != null)
-                {
-
-                }
-                else if (filter.County != null && filter.Month != null)
-                {
-
-                }
-                else if (filter.County != null)
-                {
-
-                }
-                else if(filter.City != null && filter.Month != null && filter.Year != null)
+            }
+            else if (filter.County != null && filter.Year != null)
+            {
+                crashes = await _repo.Crashes
+                .Where(c => c.Location.County != null && c.Location.County == filter.County && c.DateTime.Value.Year == filter.Year)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
+            }
+            else if (filter.County != null && filter.Month != null)
+            {
+                crashes = await _repo.Crashes
+                .Where(c => c.Location.County != null && c.Location.County == filter.County && c.DateTime.Value.Month == filter.Month)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
+            }
+            else if (filter.County != null)
+            {
+                crashes = await _repo.Crashes
+                .Where(c => c.Location.County != null && c.Location.County == filter.County)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
+            }
+            else if(filter.City != null && filter.Month != null && filter.Year != null)
                 {
 
                 }
