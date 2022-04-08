@@ -149,11 +149,18 @@ namespace YeetCarAccidents.Controllers
         {
             ViewBag.Location = await _repo.Location.ToListAsync();
             var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
-            //UniversalTransverseMercator utm = new UniversalTransverseMercator("Q", 14, 581943.5, 2111989.8);
-            UniversalTransverseMercator utm = new UniversalTransverseMercator("Q", 14, (double) crash.Location.Longitude, (double)crash.Location.Latitude);
+            UniversalTransverseMercator utm = new UniversalTransverseMercator("Q", 12, (double)crash.Location.Longitude, (double)crash.Location.Latitude);
             Coordinate c = UniversalTransverseMercator.ConvertUTMtoLatLong(utm);
+            var lati = c.Latitude.ToDouble();
+            var longit = c.Longitude.ToDouble();
 
-            return View(c);
+            var murli = $"https://maps.googleapis.com/maps/api/staticmap?center=40.758701,-111.876183&zoom=8&size=800x800&key=AIzaSyALwDEe-8OduETgZsZ1xQ9RXTAbqbaYEbY&markers={lati},{longit}";
+
+            var mvm = new MapsViewModel
+            {
+                murl = murli
+            };
+            return View(mvm);
         }
 
 

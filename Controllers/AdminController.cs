@@ -25,7 +25,7 @@ namespace YeetCarAccidents.Controllers
         [Authorize(Roles = "Writer")]
         public IActionResult ListUsers()
         {
-            var users = userManager.Users;
+            var users = userManager.Users.ToList();
             return View(users);
         }
         //VIEW ALL ROLES
@@ -34,7 +34,7 @@ namespace YeetCarAccidents.Controllers
         [Authorize(Roles = "Writer")]
         public IActionResult ListRoles()
         {
-            var roles = roleManager.Roles;
+            var roles = roleManager.Roles.ToList();
             return View(roles);
         }
         //CREATE ROLES
@@ -58,9 +58,43 @@ namespace YeetCarAccidents.Controllers
             return View();
         }
         //CHANGE ROLES OF USERS
+        //        [Route("Admin/EditUsersInRole")]
+        //        [HttpGet]
+        ///*        [Authorize(Roles = "Writer")]
+        //*/        public async Task<IActionResult> EditUsersInRole(string Id)
+        //        {
+        //            ViewBag.roleId = Id;
+        //            var role = await roleManager.FindByIdAsync(Id);
+        //            if (role == null)
+        //            {
+        //                ViewBag.ErrorMessage = $"Role with Id {Id} is not found";
+        //                return View("NotFound");
+        //            }
+
+        //            var model = new List<UserModel>();
+        //            foreach (var user in userManager.Users)
+        //            {
+        //                var UserRoleView = new UserModel
+        //                {
+        //                    UserId = user.Id,
+        //                    UserName = user.UserName
+        //                };
+        //                if (await userManager.IsInRoleAsync(user, role.Name))
+        //                {
+        //                    UserRoleView.IsSelected = true;
+        //                }
+        //                else
+        //                {
+        //                    UserRoleView.IsSelected = false;
+        //                }
+        //                model.Add(UserRoleView);
+        //            }
+        //            return View(model);
+        //        }
         [Route("Admin/EditUsersInRole")]
         [HttpGet]
-        [Authorize(Roles = "Writer")]
+        /*        [Authorize(Roles = "Writer")]
+        */
         public async Task<IActionResult> EditUsersInRole(string Id)
         {
             ViewBag.roleId = Id;
@@ -80,6 +114,14 @@ namespace YeetCarAccidents.Controllers
                     UserName = user.UserName,
                     IsSelected = false
                 };
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    UserRoleView.IsSelected = true;
+                }
+                else
+                {
+                    UserRoleView.IsSelected = false;
+                }
                 model.Add(UserRoleView);
             }
             return View(model);
