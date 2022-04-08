@@ -1,13 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Utah Crash Data";
-    //todo: dynamically update title based on county selected? 
+    //todo: dynamically update title based on county selected?
 }
 
 @model DashboardViewModel;
 <head>
     <!--Content security policy header-->
     <meta http-equiv="Content-Security-Policy"
-            content="default-src 'self';
+          content="default-src 'self';
 script-src 'report-sample' 'self' https://cdn.polyfill.io/v2/polyfill.min.js;
 style-src 'report-sample' 'self';
 object-src 'none';
@@ -20,16 +20,22 @@ manifest-src 'self';
 media-src 'self';
 report-uri https://62505347a340fe1bf24b25a4.endpoint.csper.io/?v=1;
 worker-src 'none'" ;
-            upgrade-insecure-requests;">
+          upgrade-insecure-requests;">
 
 </head>
 <div class="text-center">
     <h1 class="display-4">@ViewBag.Title</h1>
 </div>
+
+@if (ViewBag.IsAdmin)
+{
+    <a asp-controller="Home" asp-action="CrashChange" class="btn btn-primary my-4 float-right">Add</a>
+}
+
 <div class="row">
     @* Filter Builder *@
     <div class="col-4 sticky-top h-vh">
-        <div class="d-flex flex-column h-100 justify-content-between">
+        <div class="d-flex flex-column justify-content-between">
             @* Create space between the pagination and categories*@
             <div>
                 @*<h4 class="mt-4 mb-2">Filter</h4>*@

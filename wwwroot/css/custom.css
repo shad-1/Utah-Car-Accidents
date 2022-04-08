@@ -31,7 +31,7 @@ main {
 }
 
 .page-navigation {
-    margin-top: 4rem;
+    margin-top: 2rem;
 }
 
 .grid {
@@ -114,6 +114,27 @@ main {
     .tableauPlaceholder * {
         max-width: 50vw;
     }
+
+
+/* Quiz */
+/*div.quiz-reel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+div.quiz-reel div {
+    height: calc(100vh - 57px) !important;
+    width: 100%;
+
+}
+div.form-group {
+    justify-content: center !important;
+}*/
+
+.form-group {
+    margin-bottom: .5rem !important;
+}
 
 
 

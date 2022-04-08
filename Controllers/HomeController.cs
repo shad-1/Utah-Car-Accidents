@@ -52,16 +52,6 @@ namespace YeetCarAccidents.Controllers
             bool isAdmin = HttpContext.User.IsInRole("Writer");
             ViewBag.isAdmin = isAdmin;
 
-
-            if (filter is null)
-            {
-                crashes = await _repo.Crashes
-                    .Include("Location")
-                    .OrderByDescending(crash => crash.DateTime)
-                    .Skip((pageNum - 1) * cardsPerPage)
-                    .Take(cardsPerPage)
-                    .ToListAsync();
-            }
             else // We have a filter!
             {
                 crashes = await _repo.Crashes
@@ -70,6 +60,73 @@ namespace YeetCarAccidents.Controllers
                     .OrderByDescending(crash => crash.DateTime)
                     .ToListAsync();
 
+                //Giant filtering!!!!
+                if (filter.County != null && filter.City != null && filter.Month != null && filter.Year != null)
+                {
+
+                }
+                else if (filter.County != null && filter.City != null && filter.Month != null)
+                {
+
+                }
+                else if (filter.County != null && filter.City != null && filter.Year != null)
+                {
+
+                }
+                else if (filter.County != null && filter.City != null)
+                {
+
+                }
+                else if (filter.County != null && filter.Year != null)
+                {
+
+                }
+                else if (filter.County != null && filter.Month != null)
+                {
+
+                }
+                else if (filter.County != null)
+                {
+
+                }
+                else if(filter.City != null && filter.Month != null && filter.Year != null)
+                {
+
+                }
+                else if (filter.City != null && filter.Month != null)
+                {
+
+                }
+                else if (filter.City != null && filter.Year != null)
+                {
+
+                }
+                else if (filter.City != null)
+                {
+
+                }
+                else if (filter.Month != null && filter.Year != null)
+                {
+
+                }
+                else if (filter.Month != null)
+                {
+
+                }
+                else if (filter.Year != null)
+                {
+
+                }
+                else
+                {
+                    crashes = await _repo.Crashes
+                    .Include("Location")
+                    .OrderByDescending(crash => crash.DateTime)
+                    .Skip((pageNum - 1) * cardsPerPage)
+                    .Take(cardsPerPage)
+                    .ToListAsync();
+                }
+               
                 if (filter.County != null)
                     crashes = crashes
                     .Where(c => c.Location.County != null && c.Location.County == filter.County)
