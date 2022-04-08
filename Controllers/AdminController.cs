@@ -77,16 +77,18 @@ namespace YeetCarAccidents.Controllers
                 var UserRoleView = new UserModel
                 {
                     UserId = user.Id,
-                    UserName = user.UserName
+                    UserName = user.UserName,
+                    IsSelected = false
                 };
-                if (await userManager.IsInRoleAsync(user, role.Name))
+
+/*                if (await userManager.IsInRoleAsync(user, role.Name))
                 {
                     UserRoleView.IsSelected = true;
                 }
                 else
                 {
                     UserRoleView.IsSelected = false;
-                }
+                }*/
                 model.Add(UserRoleView);
             }
             return View(model);
@@ -122,10 +124,12 @@ namespace YeetCarAccidents.Controllers
                     if (i < (model.Count - 1))
                         continue;
                     else
-                        return RedirectToAction("EditRole", new { Id = Id });
+                        //return RedirectToAction("EditRole", new { Id = Id });
+                        return RedirectToAction("ListRoles");
                 }
             }
-            return RedirectToAction("EditRole", new { Id = Id });
+            //return RedirectToAction("EditRole", new { Id = Id });
+            return RedirectToAction("ListRoles");
         }
     }
 }
