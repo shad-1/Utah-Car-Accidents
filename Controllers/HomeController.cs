@@ -119,69 +119,81 @@ namespace YeetCarAccidents.Controllers
             }
             else if(filter.City != null && filter.Month != null && filter.Year != null)
                 {
-
+                    crashes = await _repo.Crashes
+                .Where(c => c.Location != null && c.Location.City != null && c.Location.City == filter.City && c.DateTime != null && c.DateTime.Value.Month == filter.Month && c.DateTime.Value.Year == filter.Year)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
                 }
                 else if (filter.City != null && filter.Month != null)
                 {
-
+                    crashes = await _repo.Crashes
+                .Where(c => c.Location != null && c.Location.City != null && c.Location.City == filter.City && c.DateTime != null && c.DateTime.Value.Month == filter.Month)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
                 }
                 else if (filter.City != null && filter.Year != null)
                 {
-
+                crashes = await _repo.Crashes
+                .Where(c => c.Location != null && c.Location.City != null && c.Location.City == filter.City && c.DateTime != null && c.DateTime.Value.Year == filter.Year)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
                 }
                 else if (filter.City != null)
                 {
-
+                crashes = await _repo.Crashes
+                .Where(c => c.Location != null && c.Location.City != null && c.Location.City == filter.City)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
                 }
                 else if (filter.Month != null && filter.Year != null)
                 {
-
+                    crashes = await _repo.Crashes
+                .Where(c => c.DateTime != null && c.DateTime.Value.Month == filter.Month && c.DateTime.Value.Year == filter.Year)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
                 }
                 else if (filter.Month != null)
                 {
-
+                crashes = await _repo.Crashes
+                .Where(c => c.DateTime != null && c.DateTime.Value.Month == filter.Month)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
                 }
                 else if (filter.Year != null)
                 {
-
-                }
+                crashes = await _repo.Crashes
+                .Where(c => c.DateTime != null && c.DateTime.Value.Year == filter.Year)
+                .Include("Location")
+                .OrderByDescending(crash => crash.DateTime)
+                .ToListAsync();
+            }
                 else
                 {
                     crashes = await _repo.Crashes
                     .Include("Location")
+                    .Take(500)
                     .OrderByDescending(crash => crash.DateTime)
-                    .Skip((pageNum - 1) * cardsPerPage)
-                    .Take(cardsPerPage)
                     .ToListAsync();
                 }
                
-
-                    crashes = crashes
-                    .Where(c => c.Location.County != null && c.Location.County == filter.County)
-                    .ToList();
-
-    
-                    crashes = crashes
-                    .Where(c => c.Location.City != null && c.Location.City == filter.City)
-                    .ToList();
-
-                    crashes = crashes
-                    .Where(c => c.DateTime != null && c.DateTime.Value.Month == filter.Month)
-                    .ToList();
-
-                    crashes = crashes
-                    .Where(c => c.DateTime != null && c.DateTime.Value.Year == filter.Year)
-                    .ToList();
-
+                //filter on the boolean conditions
                 if (filter.booleans != null)
                     foreach(var b in filter.booleans)
                     {
                         crashes = crashes.Where(c => c.GetType().GetProperty(b).GetValue(c).Equals(true)).ToList();
                     }
 
-                crashes = crashes.AsQueryable()
-                    .Skip((pageNum - 1) * cardsPerPage)
-                    .Take(cardsPerPage).ToList();
+            //get total dataset before limiting to 10 per page
+            var totalCrashes = crashes.Count;
+
+            crashes = crashes.AsQueryable()
+                    .Skip((pageNum - 1) * cardsPerPage).Take(cardsPerPage).ToList();
             
             //var location = await _repo.Location.Take(cardsPerPage * 3).AsNoTracking().ToListAsync(); //todo: add location filtering
 
@@ -212,7 +224,7 @@ namespace YeetCarAccidents.Controllers
                 Filter = filter ?? new FilterInfo(),
                 PageInfo = new PageInfo
                 {
-                    Items = crashes.Count(),
+                    Items = totalCrashes,
                     PerPage = cardsPerPage,
                     CurrentPage = pageNum
                 }
