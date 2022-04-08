@@ -49,17 +49,17 @@
         @if (ViewBag.isAdmin)
         {
             <div class="align-baseline">
-                <a class="btn btn-sm btn-info" asp-controller="Home" asp-action="Details" asp-route-crashid="@Model.CrashId">Details</a>
-                <a asp-controller="Home" asp-action="MapCrash" asp-route-crashid="@Model.CrashId">Map</a>
-                <a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.CrashId">Edit</a>
-                <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@Model.CrashId">Delete</a>
+                <a class="btn btn-sm btn-info" asp-controller="Home" asp-action="Details" asp-route-crashid="@Model.CrashId" OnClick="ShowProgress(true);">Details</a>
+                <a asp-controller="Home" class="btn btn-sm btn-success" asp-action="MapCrash" asp-route-crashid="@Model.CrashId" OnClick="ShowProgress(true);">Map</a>
+                <a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Edit" asp-route-crashid="@Model.CrashId" OnClick="ShowProgress(true);">Edit</a>
+                <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-crashid="@Model.CrashId" OnClick="ShowProgress(true);">Delete</a>
             </div>
         }
         else
         {
             <div class="align-baseline">
-                <a class="btn btn-sm btn-info" asp-controller="Home" asp-action="Details" asp-route-crashid="@Model.CrashId">Details</a>
-                <a asp-controller="Home" asp-action="MapCrash" asp-route-crashid="@Model.CrashId">Map</a>
+                <a class="btn btn-sm btn-info" asp-controller="Home" asp-action="Details" asp-route-crashid="@Model.CrashId" OnClick="ShowProgress(true);">Details</a>
+                <a asp-controller="Home" class="btn btn-sm btn-success" asp-action="MapCrash" asp-route-crashid="@Model.CrashId" OnClick="ShowProgress(true);">Map</a>
             </div>
         }
     </div>

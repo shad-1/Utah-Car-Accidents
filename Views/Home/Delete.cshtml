@@ -27,7 +27,7 @@ worker-src 'none'" ;
 @* at @Model.Location.RoadName in @Model.Location.City *@
 
 <form method="post" asp-controller="Home" asp-action="Delete">
-    <button type="submit">Delete</button>
-    <a asp-controller="Home" asp-action="Admin" class="btn btn-primary">Cancel</a>
+    <button type="submit" class="btn btn-outline-danger mr-3" OnClick="ShowProgress(true);">Delete</button>
+    <a asp-controller="Home" asp-action="Dashboard" class="btn btn-primary" OnClick="ShowProgress(true);">Cancel</a>
     <input type="hidden" asp-for="@Model.CrashId" />
 </form>

@@ -24,7 +24,7 @@ worker-src 'none'" ;
 </head>
 <h1>Add or Edit a Crash</h1>
 
-<a asp-controller="Home" asp-action="Admin" class="btn btn-primary">Back</a>
+<a asp-controller="Home" asp-action="Admin" class="btn btn-primary my-4" OnClick="ShowProgress(true);">Back</a>
 <div>
     <form method="post">
         <table class="table table-sm table-striped table-bordered">
@@ -70,7 +70,7 @@ worker-src 'none'" ;
                 <tr><td><label asp-for="RoadwayDeparture">Roadway Departure:</label></td><td><select asp-for="RoadwayDeparture"><option value="false">False</option><option value="true">True</option></select></td></tr>
             </tbody>
         </table>
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-large btn-primary my-4 OnClick="ShowProgress(true);"">Submit</button>
     </form>
 
 

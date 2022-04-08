@@ -240,7 +240,7 @@ namespace YeetCarAccidents.Controllers
         public IActionResult Edit(Crash c)
         {
             _repo.UpdateCrash(c);
-            return RedirectToAction("Admin");
+            return RedirectToAction("Dashboard");
         }
 
         [Route("Delete")]
@@ -260,7 +260,7 @@ namespace YeetCarAccidents.Controllers
         {
             var c = await _repo.Crashes.SingleAsync(x => x.CrashId == crash.CrashId);
             _repo.DeleteCrash(c);
-            return RedirectToAction("Admin");
+            return RedirectToAction("Dashboard");
         }
 
  
