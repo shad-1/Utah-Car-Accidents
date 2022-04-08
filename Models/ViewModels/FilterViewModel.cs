@@ -10,7 +10,7 @@ namespace YeetCarAccidents.Models.ViewModels
 		public IQueryable<string> Cities { get; set; }
 		public IQueryable<string> DaysOfWeek { get; set; }
 		public List<int> DaysOfMonth { get; set; }
-		public IQueryable<string> Months { get; set; }
+		public List<int> Months { get; set; }
 		public List<int> Years { get; set; }
 	}
 }

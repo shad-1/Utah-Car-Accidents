@@ -47,13 +47,14 @@ namespace YeetCarAccidents.Controllers
         {
             const int cardsPerPage = 10;
             var crashes = new List<Crash>();
+            ViewBag.CurrentPage = pageNum;
+            ViewBag.Filter = filter;
+            bool isAdmin = HttpContext.User.IsInRole("Writer");
+            ViewBag.isAdmin = isAdmin;
 
 
             if (filter is null)
             {
-                //filter null check
-                //ViewBag.SelectedCounty = filter.County;
-
                 crashes = await _repo.Crashes
                     .Include("Location")
                     .OrderByDescending(crash => crash.DateTime)
@@ -63,16 +64,41 @@ namespace YeetCarAccidents.Controllers
             }
             else // We have a filter!
             {
-                if (filter.County != null)
-                {
-                    ViewBag.SelectedCounty = filter.County;
-                }
                 crashes = await _repo.Crashes
+                    .Take(500)
                     .Include("Location")
                     .OrderByDescending(crash => crash.DateTime)
-                    .Skip((pageNum - 1) * cardsPerPage)
-                    .Take(cardsPerPage)
                     .ToListAsync();
+
+                if (filter.County != null)
+                    crashes = crashes
+                    .Where(c => c.Location.County != null && c.Location.County == filter.County)
+                    .ToList();
+
+                if (filter.City != null)
+                    crashes = crashes
+                    .Where(c => c.Location.City != null && c.Location.City == filter.City)
+                    .ToList();
+
+                if (filter.Month != null)
+                    crashes = crashes
+                    .Where(c => c.DateTime != null && c.DateTime.Value.Month == filter.Month)
+                    .ToList();
+
+                if (filter.Year != null)
+                    crashes = crashes
+                    .Where(c => c.DateTime != null && c.DateTime.Value.Year == filter.Year)
+                    .ToList();
+
+                if (filter.booleans != null)
+                    foreach(var b in filter.booleans)
+                    {
+                        crashes = crashes.Where(c => c.GetType().GetProperty(b).GetValue(c).Equals(true)).ToList();
+                    }
+
+                crashes = crashes.AsQueryable()
+                    .Skip((pageNum - 1) * cardsPerPage)
+                    .Take(cardsPerPage).ToList();
             }
             //var location = await _repo.Location.Take(cardsPerPage * 3).AsNoTracking().ToListAsync(); //todo: add location filtering
 
@@ -126,18 +152,6 @@ namespace YeetCarAccidents.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        //TEST
-        [Route("SuperSecret")]
-        [Route("Home/SuperSecret")]
-        [HttpGet]
-/*        [Authorize(Roles ="Writer")]
-*/        public IActionResult SuperSecret()
-        {
-            bool isAdmin = HttpContext.User.IsInRole("Writer");
-            ViewBag.isAdmin = isAdmin;
-            return View();
-        }
-        //COOKIE SECTION
 
         [Route("MapCrash")]
         [Route("Home/MapCrash")]
@@ -146,11 +160,18 @@ namespace YeetCarAccidents.Controllers
         {
             ViewBag.Location = await _repo.Location.ToListAsync();
             var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
-            //UniversalTransverseMercator utm = new UniversalTransverseMercator("Q", 14, 581943.5, 2111989.8);
-            UniversalTransverseMercator utm = new UniversalTransverseMercator("Q", 14, (double) crash.Location.Longitude, (double)crash.Location.Latitude);
+            UniversalTransverseMercator utm = new UniversalTransverseMercator("Q", 12, (double)crash.Location.Longitude, (double)crash.Location.Latitude);
             Coordinate c = UniversalTransverseMercator.ConvertUTMtoLatLong(utm);
+            var lati = c.Latitude.ToDouble();
+            var longit = c.Longitude.ToDouble();
 
-            return View(c);
+            var murli = $"https://maps.googleapis.com/maps/api/staticmap?center=40.758701,-111.876183&zoom=8&size=800x800&key=AIzaSyALwDEe-8OduETgZsZ1xQ9RXTAbqbaYEbY&markers={lati},{longit}";
+
+            var mvm = new MapsViewModel
+            {
+                murl = murli
+            };
+            return View(mvm);
         }
 
 
@@ -185,6 +206,7 @@ namespace YeetCarAccidents.Controllers
         [Route("CrashChange")]
         [Route("Home/CrashChange")]
         [HttpGet]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CrashChange()
         {
             ViewBag.Location = await _repo.Location.ToListAsync();
@@ -194,6 +216,7 @@ namespace YeetCarAccidents.Controllers
 
         [Route("Home/CrashChange")]
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CrashChange(Crash c)
         {
             if (ModelState.IsValid)
@@ -221,6 +244,7 @@ namespace YeetCarAccidents.Controllers
         [Route("Edit")]
         [Route("Home/Edit")]
         [HttpGet]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Edit(int crashid)
         {
             ViewBag.Location = await _repo.Location.ToListAsync();
@@ -230,6 +254,7 @@ namespace YeetCarAccidents.Controllers
 
         [Route("Home/Edit")]
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public IActionResult Edit(Crash c)
         {
             _repo.UpdateCrash(c);
@@ -239,6 +264,7 @@ namespace YeetCarAccidents.Controllers
         [Route("Delete")]
         [Route("Home/Delete")]
         [HttpGet]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete(int crashid)
         {
             var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
@@ -247,6 +273,7 @@ namespace YeetCarAccidents.Controllers
 
         [Route("Delete")]
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete(Crash crash)
         {
             var c = await _repo.Crashes.SingleAsync(x => x.CrashId == crash.CrashId);

@@ -3,29 +3,171 @@
     FilterViewModel FilterBuilder = ViewBag.FilterViewModel;
 }
 <form method="get" asp-route="Default" asp-route-filter="@Model">
-
+    @*County*@
     <div class="form-group">
         <label asp-for="@Model.County">County</label>
-        <select class="form-control" asp-for="County">
+        <select class="form-control" asp-for="@Model.County">
             <option selected="@(Model.County is null ? "selected" : "")" value="">Please select</option>
             @foreach (var county in FilterBuilder.Counties)
-                {
-                    if(Model.County == county)
+            {
+                if (Model.County == county)
                 {
                     <option selected="selected" asp-for="@Model.County">
                         @county
                     </option>
                 }
-                    else
+                else
                 {
                     <option asp-for="@Model.County">
                         @county
                     </option>
                 }
-                
-        }
+            }
         </select>
+    </div>
+    @*City*@
+    <div class="form-group">
+        <label asp-for="@Model.City">City</label>
+        <select class="form-control" asp-for="@Model.City">
+            <option selected="@(Model.City is null ? "selected" : "")" value="">Please select</option>
+            @foreach (var city in FilterBuilder.Cities)
+            {
+                if (Model.City == city)
+                {
+                    <option selected="selected" asp-for="@Model.City">
+                        @city
+                    </option>
+                }
+                else
+                {
+                    <option asp-for="@Model.City">
+                        @city
+                    </option>
+                }
+            }
+        </select>
+    </div>
+    @*  NOT INITIALLY IMPLEMENTED
+    
+    <div class="form-group">
+        <label asp-for="@Model.DayOfWeek">Day of Week</label>
+        <select class="form-control" asp-for="@Model.DayOfWeek">
+            <option selected="@(Model.DayOfWeek is null ? "selected" : "")" value="">Please select</option>
+            @foreach (var day in FilterBuilder.DaysOfWeek)
+            {
+                if (Model.DayOfWeek == day)
+                {
+                    <option selected="selected" asp-for="@Model.DayOfWeek">
+                        @day
+                    </option>
+                }
+                else
+                {
+                    <option asp-for="@Model.DayOfWeek">
+                        @day
+                    </option>
+                }
+            }
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="@Model.DayOfMonth">Day of Month</label>
+        <select class="form-control" asp-for="@Model.DayOfMonth">
+            <option selected="@(Model.DayOfMonth is null ? "selected" : "")" value="">Please select</option>
+            @foreach (var day in FilterBuilder.DaysOfMonth)
+            {
+                if (Model.DayOfMonth == day)
+                {
+                    <option selected="selected" asp-for="@Model.DayOfMonth">
+                        @day
+                    </option>
+                }
+                else
+                {
+                    <option asp-for="@Model.DayOfMonth">
+                        @day
+                    </option>
+                }
+            }
+        </select>
+    </div> *@
+    @*Month*@
+    <div class="form-group">
+        <label asp-for="@Model.Month">Month</label>
+        <select class="form-control" asp-for="@Model.Month">
+            <option selected="@(Model.Month is null ? "selected" : "")" value="">Please select</option>
+            @{
+                var months = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            }
+            @foreach (var month in FilterBuilder.Months)
+            {
+                if (Model.Month == month)
+                {
+                    <option selected="selected" asp-for="@Model.Month" value="@month">
+                        @months[month - 1].ToString()
+                    </option>
+                }
+                else
+                {
+        <option asp-for="@Model.Month" value="@month">
+            @months[month - 1].ToString()
+        </option>
+                }
+            }
+        </select>
+    </div>
+    @*Year*@
+    <div class="form-group">
+        <label asp-for="@Model.Year">Year</label>
+        <select class="form-control" asp-for="@Model.Year">
+            <option selected="@(Model.Year is null ? "selected" : "")" value="">Please select</option>
+            @foreach (var year in FilterBuilder.Years)
+            {
+                if (Model.Year == year)
+                {
+                    <option selected="selected" asp-for="@Model.Year">
+                        @year
+                    </option>
+                }
+                else
+                {
+                    <option asp-for="@Model.Year">
+                        @year
+                    </option>
+                }
+            }
+        </select>
+    </div>
+    @*Boolean Criteria*@
+    <div class="form-group">
+        <label for="@Model.booleans">Year</label>
+        <select class="form-control" asp-for="@Model.booleans" multiple>
+            @*We originally used reflection to grab all the property names,
+                and it was useful for catching errors in the values submitted,
+                but hardcoding the feature names in the values results in a faster load time *@
+            <option value="WorkZone">Work Zone</option>
+            <option value="Pedestrian">Pedestrian</option>
+            <option value="Bicyclist">Bicyclist</option>
+            <option value="Motorcycle">Motorcycle</option>
+            <option value="ImproperRestraint">Improper Restraint</option>
+            <option value="Unrestrained">Unrestrained</option>
+            <option value="Dui">DUI</option>
+            <option value="Intersection">Intersection</option>
+            <option value="WildAnimal">Wild Animal</option>
+            <option value="DomesticAnimal">Domestic Animal</option>
+            <option value="Commercial">Commercial Vehicle</option>
+            <option value="Teenage">Teenage</option>
+            <option value="Older">Older</option>
+            <option value="Night">Night</option>
+            <option value="SingleVehicle">Single Vehicle</option>
+            <option value="Distracted">Distracted</option>
+            <option value="Drowsy">Drowsy</option>
+            <option value="RoadwayDeparture">Roadway Departure</option>
+        </select>
+        <em>Select multiple with (ctrl + click) or (⌘ + click)</em>
     </div>
 
     <button type="submit" class="btn btn-primary">Filter</button>
+    <a class="mx-4" asp-route="Dashboard" asp-route-pageNum="@ViewBag.CurrentPage">Reset</a>
 </form>

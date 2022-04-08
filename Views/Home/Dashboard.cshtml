@@ -4,13 +4,31 @@
 }
 
 @model DashboardViewModel;
+<head>
+    <!--Content security policy header-->
+    <meta http-equiv="Content-Security-Policy"
+            content="default-src 'self';
+script-src 'report-sample' 'self' https://cdn.polyfill.io/v2/polyfill.min.js;
+style-src 'report-sample' 'self';
+object-src 'none';
+base-uri 'self';
+connect-src 'self' https://app.launchdarkly.com https://clientstream.launchdarkly.com https://events.launchdarkly.com,
+font-src 'self';
+frame-src 'self';
+img-src 'self' data:;
+manifest-src 'self';
+media-src 'self';
+report-uri https://62505347a340fe1bf24b25a4.endpoint.csper.io/?v=1;
+worker-src 'none'" ;
+            upgrade-insecure-requests;">
 
+</head>
 <div class="text-center">
     <h1 class="display-4">@ViewBag.Title</h1>
 </div>
 <div class="row">
     @* Filter Builder *@
-    <div class="col-3 sticky-top h-vh">
+    <div class="col-4 sticky-top h-vh">
         <div class="d-flex flex-column h-100 justify-content-between">
             @* Create space between the pagination and categories*@
             <div>
@@ -18,12 +36,12 @@
                 <vc:filter filter="@Model.Filter"></vc:filter>
             </div>
 
-            <div class="page-navigation" page-info="@Model.PageInfo" page-action="Dashboard"></div>
+            <div class="page-navigation" page-info="@Model.PageInfo" filter="@Model.Filter" page-action="Dashboard"></div>
         </div>
 
     </div>
     @* Crash Quick Info Cards *@
-    <div class="col-9">
+    <div class="col-8">
         @foreach (Crash crash in Model.Crashes)
         {
             <partial name="CrashSummary" model="crash" />
