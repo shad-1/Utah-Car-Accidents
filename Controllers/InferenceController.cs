@@ -16,29 +16,15 @@ namespace YeetCarAccidents.Controllers
         {
             _session = session;
         }
-        [Route("Inference/Testagain")]
-        [HttpGet]
-        public IActionResult TestAgain()
-        {
-            var plsMod = new TestModel();
-            return View(plsMod);
-        }
-        [Route("Inference/PrintTest")]
-        [HttpPost]
-        public IActionResult PrintTest(TestModel plsMod)
-        {
-            ViewBag.val = plsMod.chec;
-            return View();
-        }
         [Route("Inference/Calculator")]
         [HttpGet]
         public IActionResult Calculator()
         {
             return View();
         }
-        [Route("Inference/Test")]
+        [Route("Inference/PrintSeverity")]
         [HttpPost]
-        public IActionResult Test(CrashData data)
+        public IActionResult PrintSeverity(CrashData data)
         {
             var result = _session.Run(new List<NamedOnnxValue>
             {
@@ -47,7 +33,7 @@ namespace YeetCarAccidents.Controllers
             Tensor<float> score = result.First().AsTensor<float>();
             var prediction = new SeverityPrediction { Crash_severity_id = score.First() };
             result.Dispose();
-            return View("Test", prediction);
+            return View("PrintSeverity", prediction);
         }
     }
 }
