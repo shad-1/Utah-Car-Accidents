@@ -1,13 +1,31 @@
 ﻿@{
     ViewData["Title"] = "Accident Severity";
 }
+<head>
+    <!--Content security policy header-->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+    script-src 'report-sample' 'self' https://cdn.polyfill.io/v2/polyfill.min.js;
+    style-src 'report-sample' 'self';
+    object-src 'none';
+    base-uri 'self';
+    connect-src 'self' https://app.launchdarkly.com https://clientstream.launchdarkly.com https://events.launchdarkly.com,
+    font-src 'self';
+    frame-src 'self';
+    img-src 'self' data:;
+    manifest-src 'self';
+    media-src 'self';
+    report-uri https://62505347a340fe1bf24b25a4.endpoint.csper.io/?v=1;
+    worker-src 'none'" ;
+          upgrade-insecure-requests;">
 
+</head>
 <h1>Accident Severity: Factors Behind Fatalities</h1>
 <p class="lead">
     Not all people, or factors involved have the same weight in whether someone is more likely to die in a car accident.
 </p>
 <div class="float-right">
-    <img src="~/img/Factors.png" width="500" />
+    <img src="~/img/Factors.png" width="600" height="500" />
 </div>
 <div class="col-5">
 <p>

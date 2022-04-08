@@ -38,7 +38,6 @@ namespace YeetCarAccidents.Controllers
             return View(roles);
         }
         //CREATE ROLES
-        [HttpGet]
         [Route("Admin/CreateRole")]
         [Authorize(Roles = "Writer")]
         public IActionResult CreateRole()

@@ -10,7 +10,7 @@ namespace YeetCarAccidents.Models.ViewModels
         public string? City { get; set; }
         public string? DayOfWeek { get; set; }
         public int? DayOfMonth { get; set; }
-        public string? Month { get; set; }
+        public int? Month { get; set; }
         public int? Year { get; set; }
         public bool? WorkZone { get; set; }
         public bool? Pedestrian { get; set; }
@@ -31,5 +31,7 @@ namespace YeetCarAccidents.Models.ViewModels
         public bool? Distracted { get; set; }
         public bool? Drowsy { get; set; }
         public bool? RoadwayDeparture { get; set; }
+
+        public List<string>? booleans { get; set; }
     }
 }

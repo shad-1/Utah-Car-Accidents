@@ -47,15 +47,14 @@ namespace YeetCarAccidents.Controllers
         {
             const int cardsPerPage = 10;
             var crashes = new List<Crash>();
+            ViewBag.CurrentPage = pageNum;
+            ViewBag.Filter = filter;
             bool isAdmin = HttpContext.User.IsInRole("Writer");
             ViewBag.isAdmin = isAdmin;
 
 
             if (filter is null)
             {
-                //filter null check
-                //ViewBag.SelectedCounty = filter.County;
-
                 crashes = await _repo.Crashes
                     .Include("Location")
                     .OrderByDescending(crash => crash.DateTime)
@@ -65,16 +64,41 @@ namespace YeetCarAccidents.Controllers
             }
             else // We have a filter!
             {
-                if (filter.County != null)
-                {
-                    ViewBag.SelectedCounty = filter.County;
-                }
                 crashes = await _repo.Crashes
+                    .Take(500)
                     .Include("Location")
                     .OrderByDescending(crash => crash.DateTime)
-                    .Skip((pageNum - 1) * cardsPerPage)
-                    .Take(cardsPerPage)
                     .ToListAsync();
+
+                if (filter.County != null)
+                    crashes = crashes
+                    .Where(c => c.Location.County != null && c.Location.County == filter.County)
+                    .ToList();
+
+                if (filter.City != null)
+                    crashes = crashes
+                    .Where(c => c.Location.City != null && c.Location.City == filter.City)
+                    .ToList();
+
+                if (filter.Month != null)
+                    crashes = crashes
+                    .Where(c => c.DateTime != null && c.DateTime.Value.Month == filter.Month)
+                    .ToList();
+
+                if (filter.Year != null)
+                    crashes = crashes
+                    .Where(c => c.DateTime != null && c.DateTime.Value.Year == filter.Year)
+                    .ToList();
+
+                if (filter.booleans != null)
+                    foreach(var b in filter.booleans)
+                    {
+                        crashes = crashes.Where(c => c.GetType().GetProperty(b).GetValue(c).Equals(true)).ToList();
+                    }
+
+                crashes = crashes.AsQueryable()
+                    .Skip((pageNum - 1) * cardsPerPage)
+                    .Take(cardsPerPage).ToList();
             }
             //var location = await _repo.Location.Take(cardsPerPage * 3).AsNoTracking().ToListAsync(); //todo: add location filtering
 
@@ -128,19 +152,6 @@ namespace YeetCarAccidents.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        //*************************************************DELETE BEFORE DEPLOYMENT*****************************************
-        //TEST
-        [Route("SuperSecret")]
-        [Route("Home/SuperSecret")]
-        [HttpGet]
-        public IActionResult SuperSecret()
-        {
-            bool isAdmin = HttpContext.User.IsInRole("Writer");
-            ViewBag.isAdmin = isAdmin;
-            return View();
-        }
-        //******************************************************************************************************************
-        //COOKIE SECTION
 
         [Route("MapCrash")]
         [Route("Home/MapCrash")]
@@ -165,24 +176,6 @@ namespace YeetCarAccidents.Controllers
             return View(mvm);
         }
 
-
-        [Route("Privacy")]
-        [Route("Home/Admin")]
-        [HttpGet]
-        public async Task<IActionResult> Admin()
-        {
-
-            var crashes = await _repo.Crashes.Include("Location").Take(15).ToListAsync();
-            return View(crashes);
-
-            //var crashes = await _repo.Crashes.Take(15).ToListAsync();
-            //var c = new AdminViewModel
-            //{
-            //    Crashes = crashes
-            //};
-            //return View(c);
-        }
-
         [Route("Details")]
         [Route("Home/Details")]
         [HttpGet]
@@ -197,6 +190,7 @@ namespace YeetCarAccidents.Controllers
         [Route("CrashChange")]
         [Route("Home/CrashChange")]
         [HttpGet]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CrashChange()
         {
             ViewBag.Location = await _repo.Location.ToListAsync();
@@ -248,7 +242,7 @@ namespace YeetCarAccidents.Controllers
         public IActionResult Edit(Crash c)
         {
             _repo.UpdateCrash(c);
-            return RedirectToAction("Admin");
+            return RedirectToAction("Dashboard");
         }
 
         [Route("Delete")]
@@ -268,13 +262,20 @@ namespace YeetCarAccidents.Controllers
         {
             var c = await _repo.Crashes.SingleAsync(x => x.CrashId == crash.CrashId);
             _repo.DeleteCrash(c);
-            return RedirectToAction("Admin");
+            return RedirectToAction("Dashboard");
         }
 
  
         [Route("Home/Causes")]
         [HttpGet]
         public IActionResult Causes()
+        {
+            return View();
+        }
+
+        [Route("Home/Tableau")]
+        [HttpGet]
+        public IActionResult Tableau()
         {
             return View();
         }

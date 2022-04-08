@@ -37,12 +37,14 @@ namespace YeetCarAccidents.Components
             var daysOfWeek = new string[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
             var daysOfMonth = new int[31];
+            var months = new int[12]; //C# dates are compared as integers
+
             for (int i = 1; i <= 31; i++)
             {
                 daysOfMonth[i - 1] = i;
+                if (i <= 12)
+                    months[i - 1] = i;
             }
-
-            var months = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
             var years = new int[] { 2016, 2017, 2019, 2020 };
 
@@ -52,7 +54,7 @@ namespace YeetCarAccidents.Components
                 Cities = cities,
                 DaysOfWeek = daysOfWeek.AsQueryable(),
                 DaysOfMonth = daysOfMonth.ToList(),
-                Months = months.AsQueryable(),
+                Months = months.ToList(),
                 Years = years.ToList()
             };
 

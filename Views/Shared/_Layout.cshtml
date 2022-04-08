@@ -41,17 +41,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SuperSecret">Confidential</a>
-                        </li>
-                        <li class="nav-item">
-                            <!--THE ASP-ACTION NEEDS TO BE CHANGED TO THE TABLE PAGE-->
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Crash Info</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Admin" OnClick="ShowProgress(true);">Admin</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-route="Dashboard" asp-route-pageNum="1" OnClick="ShowProgress(true);">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="tableau" OnClick="ShowProgress(true);">Quick Facts</a>
                         </li>
                     </ul>
                 </div>

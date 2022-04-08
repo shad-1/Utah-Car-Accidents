@@ -10,7 +10,7 @@ namespace YeetCarAccidents.Models.ViewModels
         {
             get
             {
-                return (int)Math.Ceiling((float)168708 / PerPage);
+                return (int)Math.Ceiling((float)Items / PerPage);
             }
         }
     }

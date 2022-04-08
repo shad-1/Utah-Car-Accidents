@@ -1,0 +1,282 @@
+﻿@model CrashData
+
+<h1>Crash Severity Calculator</h1>
+<p class="lead">
+    Provide responses to the following questions to determine the predicted severity of a vehicle accident. The predictions are scored on the following
+    scale:
+    <br />
+    1- No Injury<br />
+    2- Possible Injury<br />
+    3- Suspected Minor Injury<br />
+    4- Suspected Serious Injury<br />
+    5- Fatal<br />
+</p>
+
+<form method="post" asp-controller="Inference" asp-action="QuizResult">
+    <div class="form-group">
+        <label asp-for="MilePoint">What mile point do you pass by the most?</label>
+        <input class="form-control" asp-for="MilePoint" required />
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you look out for construction workers?</label><br />
+        <label class="form-check-input" asp-for="Work_zone_related">
+            <input type="radio" asp-for="Work_zone_related" name="WorkZ" value=@(1) />Yes
+            <input type="radio" asp-for="Work_zone_related" name="WorkZ" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you look for pedestrians before turning?</label><br />
+        <label class="form-check-input" asp-for="Pedestrian_involved">
+            <input type="radio" asp-for="Pedestrian_involved" name="Pede" value=@(1) />Yes
+            <input type="radio" asp-for="Pedestrian_involved" name="Pede"  value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do bicylists hogging the road make you angry?</label><br />
+        <label class="form-check-input" asp-for="Bicyclist_involved">
+            <input type="radio" asp-for="Bicyclist_involved" name="Bici" value=@(1) />Yes
+            <input type="radio" asp-for="Bicyclist_involved" name="Bici" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you check your mirrors for motorcycles?</label><br />
+        <label class="form-check-input" asp-for="Motorcycle_involved">
+            <input type="radio" asp-for="Motorcycle_involved" name="Motor" value=@(1) />Yes
+            <input type="radio" asp-for="Motorcycle_involved" name="Motor" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Is someone in your car being creative with how they use their seatbelt?</label><br />
+        <label class="form-check-input" asp-for="Improper_restraint">
+            <input type="radio" asp-for="Improper_restraint" name="Impr" value=@(1) />Yes
+            <input type="radio" asp-for="Improper_restraint" name="Impr" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Did you remember to use your seatbelt?</label><br />
+        <label class="form-check-input" asp-for="Unrestrained">
+            <input type="radio" asp-for="Unrestrained" name="Unre" value=@(1) />Yes
+            <input type="radio" asp-for="Unrestrained" name="Unre" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Did you watch for wild life crossing the road?</label><br />
+        <label class="form-check-input" asp-for="Wild_animal_related">
+            <input type="radio" asp-for="Wild_animal_related" name="Wild" value=@(1) />Yes
+            <input type="radio" asp-for="Wild_animal_related" name="Wild" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you secretly want to kill your neighbor's dog or cat?</label><br />
+        <label class="form-check-input" asp-for="Domestic_animal_related">
+            <input type="radio" asp-for="Domestic_animal_related" name="Dome" value=@(1) />Yes
+            <input type="radio" asp-for="Domestic_animal_related" name="Dome" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Would it be rad if your car did a barrol roll?</label><br />
+        <label class="form-check-input" asp-for="Overturn_rollover">
+            <input type="radio" asp-for="Overturn_rollover" name="Over" value=@(1) />Yes
+            <input type="radio" asp-for="Overturn_rollover" name="Over" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you drive a bus or semi-truck?</label><br />
+        <label class="form-check-input" asp-for="Commercial_motor_veh_involved">
+            <input type="radio" asp-for="Commercial_motor_veh_involved" name="Comm" value=@(1) />Yes
+            <input type="radio" asp-for="Commercial_motor_veh_involved" name="Comm" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Can you legally drink?</label><br />
+        <label class="form-check-input" asp-for="Teenage_driver_involved">
+            <input type="radio" asp-for="Teenage_driver_involved" name="Teen" value=@(1) />Yes
+            <input type="radio" asp-for="Teenage_driver_involved" name="Teen" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Are you eligible for the "elderly discount" at the movie theater?</label><br />
+        <label class="form-check-input" asp-for="Older_driver_involved">
+            <input type="radio" asp-for="Older_driver_involved" name="Elder" value=@(1) />Yes
+            <input type="radio" asp-for="Older_driver_involved" name="Elder" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you often drive at night?</label><br />
+        <label class="form-check-input" asp-for="Night_dark_condition">
+            <input type="radio" asp-for="Night_dark_condition" name="Night" value=@(1) />Yes
+            <input type="radio" asp-for="Night_dark_condition" name="Night" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">If you are in a bad mood, do you prefer to take the world down with you?</label><br />
+        <label class="form-check-input" asp-for="Single_vehicle">
+            <input type="radio" asp-for="Single_vehicle" name="Sing" value=@(0) />Yes
+            <input type="radio" asp-for="Single_vehicle" name="Sing" value=@(1) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you check your phone while driving?</label><br />
+        <label class="form-check-input" asp-for="Distracted_driving">
+            <input type="radio" asp-for="Distracted_driving" name="Phone" value=@(1) />Yes
+            <input type="radio" asp-for="Distracted_driving" name="Phone" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">If you are dead tired, will you still drive yourself home?</label><br />
+        <label class="form-check-input" asp-for="Drowsy_driving">
+            <input type="radio" asp-for="Drowsy_driving" name="Sleep" value=@(1) />Yes
+            <input type="radio" asp-for="Drowsy_driving" name="Sleep" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you believe all vehicles can be off-road vehicles?</label><br />
+        <label class="form-check-input" asp-for="Roadway_departure">
+            <input type="radio" asp-for="Roadway_departure" name="Offr" value=@(1) />Yes
+            <input type="radio" asp-for="Roadway_departure" name="Offr" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Month">Pick a month</label>
+        <select class="form-control" asp-for="Month" required>
+            <option selected="selected" value="">Please select</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Day">Enter a day of the month</label>
+        <input class="form-control" asp-for="Day" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Year">Enter the current year</label>
+        <input class="form-control" asp-for="Year" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Hour">What time are you normally on the road?</label>
+        <select class="form-control" asp-for="Hour" required>
+            <option selected="selected" value="">Please select</option>
+            <option value="0">12 AM</option>
+            <option value="1">1 AM</option>
+            <option value="2">2 AM</option>
+            <option value="3">3 AM</option>
+            <option value="4">4 AM</option>
+            <option value="5">5 AM</option>
+            <option value="6">6 AM</option>
+            <option value="7">7 AM</option>
+            <option value="8">8 AM</option>
+            <option value="9">9 AM</option>
+            <option value="10">10 AM</option>
+            <option value="11">11 AM</option>
+            <option value="12">12 PM</option>
+            <option value="13">1 PM</option>
+            <option value="14">2 PM</option>
+            <option value="15">3 PM</option>
+            <option value="16">4 PM</option>
+            <option value="17">5 PM</option>
+            <option value="18">6 PM</option>
+            <option value="19">7 PM</option>
+            <option value="20">8 PM</option>
+            <option value="21">9 PM</option>
+            <option value="22">10 PM</option>
+            <option value="23">11 PM</option>
+        </select>
+        </div>
+
+    <div class="form-group">
+        <label asp-for="Minutes">What time are you normally on the road continued (minute 1-59)?</label>
+        <input class="form-control" asp-for="Minutes" required /><br />
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you mainly drive on the main roads?</label><br />
+        <label class="form-check-input" asp-for="Main_road_name_Other">
+            <input type="radio" asp-for="Main_road_name_Other" name="Main" value=@(1) />Yes
+            <input type="radio" asp-for="Main_road_name_Other" name="Main" value=@(0) />No
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">Do you use Route 89?</label><br />
+        <label class="form-check-input" asp-for="Route_89">
+            <input type="radio" asp-for="Route_89" name="Routes" value=@(1) />Yes
+            <input type="hidden" asp-for="Route_89" value=@(0)>
+        </label><br />
+        <label class="form-check-input" asp-for="Route_Other">
+            <input type="radio" asp-for="Route_Other" name="Routes" value=@(1) />No
+            <input type="hidden" asp-for="Route_Other" value=@(0)>
+        </label><br /><br />
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">What city do you live in?</label><br />
+        <label class="form-check-input" asp-for="City_SALT_LAKE_CITY">
+            <input type="radio" asp-for="City_SALT_LAKE_CITY" name="Cities" value=@(1) />Salt Lake City
+            <input type="hidden" asp-for="City_SALT_LAKE_CITY" value=@(0)>
+        </label><br />
+        <label class="form-check-input" asp-for="City_WEST_VALLEY_CITY">
+            <input type="radio" asp-for="City_WEST_VALLEY_CITY" name="Cities" value=@(1) />West Valley City
+            <input type="hidden" asp-for="City_WEST_VALLEY_CITY" value=@(0)>
+        </label><br />
+        <label class="form-check-input" asp-for="City_Other">
+            <input type="radio" asp-for="City_Other" name="Cities" value=@(1) />In Another City
+            <input type="hidden" asp-for="City_Other" value=@(0)>
+        </label><br /><br />
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-input">What county do you live in?</label><br />
+        <label class="form-check-input" asp-for="County_name_SALT_LAKE">
+            <input type="radio" asp-for="County_name_SALT_LAKE" name="Counties" value=@(1) />Salt Lake County
+            <input type="hidden" asp-for="County_name_SALT_LAKE" value=@(0)>
+        </label><br />
+        <label class="form-check-input" asp-for="County_name_UTAH">
+            <input type="radio" asp-for="County_name_UTAH" name="Counties" value=@(1) />Utah County
+            <input type="hidden" asp-for="County_name_UTAH" value=@(0)>
+        </label><br />
+        <label class="form-check-input" asp-for="County_name_WEBER">
+            <input type="radio" asp-for="County_name_WEBER" name="Counties" value=@(1) />Weber County
+            <input type="hidden" asp-for="County_name_WEBER" value=@(0)>
+        </label><br />
+        <label class="form-check-input" asp-for="County_name_Other">
+            <input type="radio" asp-for="County_name_Other" name="Counties" value=@(1) />In Another County
+            <input type="hidden" asp-for="County_name_Other" value=@(0)>
+        </label><br />
+    </div>
+
+    <button type="submit">Submit</button>
+    <div asp-validation-summary="All"></div>
+    <br /><br />
+
+</form>

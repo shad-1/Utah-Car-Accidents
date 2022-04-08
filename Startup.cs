@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,8 @@ namespace YeetCarAccidents
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<InferenceSession>(
+                new InferenceSession("wwwroot/yeet.onnx"));
 
             string endpoint = Environment.GetEnvironmentVariable("ConnectionString", EnvironmentVariableTarget.Process);
 
@@ -86,7 +89,6 @@ namespace YeetCarAccidents
 
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapControllerRoute(

@@ -1,6 +1,24 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
+<head>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+    script-src 'report-sample' 'self' https://cdn.polyfill.io/v2/polyfill.min.js;
+    style-src 'report-sample' 'self';
+    object-src 'none';
+    base-uri 'self';
+    connect-src 'self' https://app.launchdarkly.com https://clientstream.launchdarkly.com https://events.launchdarkly.com,
+    font-src 'self';
+    frame-src 'self';
+    img-src 'self' data:;
+    manifest-src 'self';
+    media-src 'self';
+    report-uri https://62505347a340fe1bf24b25a4.endpoint.csper.io/?v=1;
+    worker-src 'none'" ;
+          upgrade-insecure-requests;">
+
+</head>
 <center>
     <h1 class="display-4">Life Is A Highway--Drive With Caution!</h1>
 
@@ -13,7 +31,7 @@
     explore the vast database of accident information in Utah, and see how different locations can influence the chances of being in an accident.
 </p>
 
-<div class="card card-group border-0">
+<div class="card card-group border-0" style="padding-bottom:30px">
     <div class="card">
         <img class="card-img-top" src="~/img/muhammad-daudy-4eeG4Mn0HVY-unsplash.jpg" height="400" />
         <div class="card-body">
@@ -26,16 +44,47 @@
         </div>
     </div>
     <span style="padding-left:50px"></span>
+    <div class="card">
+        <img class="card-img-top" src="~/img/clay-banks-_Jb1TF3kvsA-unsplash.jpg" height="400" />
+        <div class="card-body">
+            <h4 class="card-title">CRASH SEVERITY CALCULATOR</h4>
+            <p class="card-text">
+                See how factors leading into an accident can help predict the severity of that accident. Our crash severity calculator allows you to
+                experiment with these factors, and consider how you can decrease the chances of getting into a severe accident.
+            </p>
+            <a class="btn btn-primary" asp-controller="Inference" asp-action="Calculator">Calculate Now</a>
+            <a class="btn btn-primary" asp-controller="Inference" asp-action="Buzzfeed">Buzzfeed Quiz</a>
+        </div>
+    </div>
+
+</div>
+
+<div class="card card-group border-0">
     <div class="card card">
         <img class="card-img-top" src="~/img/other.jpg" height="400" />
         <div class="card-body">
-            <h4 class="card-title">CRASH INFORMATION</h4>
+            <h4 class="card-title">CRASH DATABASE</h4>
             <p class="card-text">
 
-                Ready to learn the truth about accidents in Utah? Which locations have the most crashes? Our database of information is available to search and view information about car accidents
-                that happened in the years 2016-2019.
+                Understanding real stories is critical to creating lasting change for vehicle safety. Our database of information is available to search and view information about car accidents
+                that happened in the years 2016-2019. Start learning more now!
             </p>
-            <a class="btn btn-primary" asp-controller="Home" asp-action="Dashboard">Explore Information</a>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Dashboard">Search Database</a>
+
+        </div>
+    </div>
+
+    <span style="padding-left:50px"></span>
+    <div class="card card">
+        <img class="card-img-top" src="~/img/agence-olloweb-qfp4-Ud6Fyg-unsplash (1).jpg" height="400" />
+        <div class="card-body">
+            <h4 class="card-title">INTERACTIVE INFORMATION</h4>
+            <p class="card-text">
+
+                Ready to learn the truth about accidents in Utah? Which locations have the most crashes? Find the answers to these questions and more
+                through working with our interactive charts and information!
+            </p>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Tableau">Explore Information</a>
 
         </div>
     </div>

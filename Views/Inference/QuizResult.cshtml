@@ -1,0 +1,21 @@
+﻿@model SeverityPrediction;
+<div>
+    <h1>Crash Severity Legend:</h1><br />
+    <h3>
+        1- No Injury<br />
+        2- Possible Injury<br />
+        3- Suspected Minor Injury<br />
+        4- Suspected Serious Injury<br />
+        5- Fatal<br />
+    </h3>
+</div>
+
+@if (@Model.Crash_severity_id >= 5)
+{
+    <h1 class="text-center">Your Crash Score: 5</h1>
+}
+else
+{
+    <h1 class="text-center">Your Crash Score: @Model.Crash_severity_id.ToString("0")</h1>
+}
+
