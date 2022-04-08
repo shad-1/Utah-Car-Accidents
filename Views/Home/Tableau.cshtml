@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Interactive Stats";
 }
-<head> <!--Content security policy header-->
+<head>
+    <!--Content security policy header-->
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'self';
     script-src 'report-sample' 'self' https://cdn.polyfill.io/v2/polyfill.min.js;
@@ -19,19 +20,50 @@
           upgrade-insecure-requests;">
 
 </head>
+
+<h1>Which Factors Appear In The Most Car Accidents?</h1>
+<p class="lead">
+    Curious to know more about which factors are present in the most car accidents? Below is an interactive chart that displays the factors possible in a
+    car accident from past data, and the number of times that they appear. Consider making sure that you mitigate these factors causing an accident when
+    you drive.
+</p>
 <!--Big interactive count of all boolean factors-->
 <div class='tableauPlaceholder' id='viz1649403063361' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IN&#47;INTEXW22&#47;FactorAppearanceCount1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='INTEXW22&#47;FactorAppearanceCount1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;IN&#47;INTEXW22&#47;FactorAppearanceCount1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
 <script type='text/javascript'>var divElement = document.getElementById('viz1649403063361'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
 
+<h1>Which Cities Have The Most Car Accidents?</h1>
+<p class="lead">
+    Different counties in Utah have different crash counts. You can increase your knowledge of how many accidents happen in which county, and compare those
+    counts across separate counties.
+</p>
 <!--Interactive of crash count/county on UT map-->
 <div class='tableauPlaceholder' id='viz1649408099997' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cr&#47;CrashPCity&#47;CtCrashpCity&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='CrashPCity&#47;CtCrashpCity' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cr&#47;CrashPCity&#47;CtCrashpCity&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
 <script type='text/javascript'>var divElement = document.getElementById('viz1649408099997'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+
+
+<p class="lead">
+    Similar to the above infographic, this pie chart shows the percentage of car crashes that each city is responsible for.
+</p>
+
 <!--Interactive pie chart of crashes/county-->
 <div class='tableauPlaceholder' id='viz1649408116745' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cr&#47;CrashPCityPie&#47;CrashpCityPie&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='CrashPCityPie&#47;CrashpCityPie' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cr&#47;CrashPCityPie&#47;CrashpCityPie&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
 <script type='text/javascript'>var divElement = document.getElementById('viz1649408116745'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+
+
+<h1>Which Cities Have The Most Severity 1 Car Crashes?</h1>
+<p class="lead">
+    Severity 1 car crashes don't result in injury, but still pose danger to individuals. Counties and the count of their severity 1 car crashes are displayed
+    in the map below.
+</p>
+
 <!--Interactive count of severity 1 crashes (UT map)-->
 <div class='tableauPlaceholder' id='viz1649408129024' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Se&#47;Severity1&#47;Severity1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Severity1&#47;Severity1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Se&#47;Severity1&#47;Severity1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
 <script type='text/javascript'>var divElement = document.getElementById('viz1649408129024'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+
+<h1>Which Cities Have The Most Severity 5 Car Crashes?</h1>
+<p class="lead">
+    Severity 5 car crashes are fatal, and its mitigation is critical to decreased vehicular danger. The count of severity 5 crashes are grouped by county below.
+</p>
 <!--Interactive count of severity 5 crashes (UT map)-->
 <div class='tableauPlaceholder' id='viz1649408138485' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Se&#47;Severity5&#47;Severity5&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Severity5&#47;Severity5' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Se&#47;Severity5&#47;Severity5&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
 <script type='text/javascript'>var divElement = document.getElementById('viz1649408138485'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
