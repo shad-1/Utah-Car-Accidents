@@ -15,7 +15,8 @@
 <form method="post" asp-controller="Inference" asp-action="Test">
     <div class="form-group">
         <label asp-for="MilePoint">Mile Point:</label>
-        <input class="form-control" asp-for="MilePoint" />
+        <input class="form-control" asp-for="MilePoint" required />
+
         <label asp-for="Work_zone_related">In a Construction Zone:</label>
         <select class="form-control" asp-for="Work_zone_related">
             <option selected="selected" value="0">No</option>
@@ -102,7 +103,7 @@
             <option value="1">Yes</option>
         </select>
         <label asp-for="Month">Month:</label>
-        <select class="form-control" asp-for="Month">
+        <select class="form-control" asp-for="Month" required>
             <option selected="selected" value="">Please select</option>
             <option value="1">January</option>
             <option value="2">February</option>
@@ -118,11 +119,11 @@
             <option value="12">December</option>
         </select>
         <label asp-for="Day">Day:</label>
-        <input class="form-control" asp-for="Day" />
+        <input class="form-control" asp-for="Day" required />
         <label asp-for="Year">Year:</label>
-        <input class="form-control" asp-for="Year" />
+        <input class="form-control" asp-for="Year" required/>
         <label asp-for="Hour">Hour The Accident Occured:</label>
-        <select class="form-control" asp-for="Hour">
+        <select class="form-control" asp-for="Hour" required>
             <option selected="selected" value="">Please select</option>
             <option value="0">12 AM</option>
             <option value="1">1 AM</option>
@@ -150,10 +151,10 @@
             <option value="23">11 PM</option>
         </select>
         <label asp-for="Minutes">Minute The Accident Occured:</label>
-        <input class="form-control" asp-for="Minutes" /><br />
+        <input class="form-control" asp-for="Minutes" required /><br />
 
         <label asp-for="Main_road_name_Other">Did It Occur On Main St or State St?</label>
-        <select class="form-control" asp-for="Main_road_name_Other">
+        <select class="form-control" asp-for="Main_road_name_Other" required>
             <option selected="selected" value="0">No</option>
             <option value="1">Yes</option>
         </select><br />
@@ -203,6 +204,7 @@
 
     </div>
     <button type="submit">Submit</button>
+    <div asp-validation-summary="All"></div>
     <br /><br />
 
 </form>
