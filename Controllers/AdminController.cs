@@ -22,8 +22,8 @@ namespace YeetCarAccidents.Controllers
         //VIEW ALL USERS
         [Route("Admin/ListUsers")]
         [HttpGet]
-/*        [Authorize(Roles ="Writer")]
-*/        public IActionResult ListUsers()
+        [Authorize(Roles = "Writer")]
+        public IActionResult ListUsers()
         {
             var users = userManager.Users;
             return View(users);
@@ -31,8 +31,8 @@ namespace YeetCarAccidents.Controllers
         //VIEW ALL ROLES
         [Route("Admin/ListRoles")]
         [HttpGet]
-/*        [Authorize(Roles = "Writer")]
-*/        public IActionResult ListRoles()
+        [Authorize(Roles = "Writer")]
+        public IActionResult ListRoles()
         {
             var roles = roleManager.Roles;
             return View(roles);
@@ -40,15 +40,15 @@ namespace YeetCarAccidents.Controllers
         //CREATE ROLES
         [HttpGet]
         [Route("Admin/CreateRole")]
-/*        [Authorize(Roles = "Writer")]
-*/        public IActionResult CreateRole()
+        [Authorize(Roles = "Writer")]
+        public IActionResult CreateRole()
         {
             return View();
         }
         [Route("Admin/CreateRole")]
         [HttpPost]
-/*        [Authorize(Roles = "Writer")]
-*/        public async Task<IActionResult> CreateRole(UserRoleView role)
+        [Authorize(Roles = "Writer")]
+        public async Task<IActionResult> CreateRole(UserRoleView role)
         {
             var roleExist = await roleManager.RoleExistsAsync(role.RoleName);
             if (!roleExist)
@@ -60,8 +60,8 @@ namespace YeetCarAccidents.Controllers
         //CHANGE ROLES OF USERS
         [Route("Admin/EditUsersInRole")]
         [HttpGet]
-/*        [Authorize(Roles = "Writer")]
-*/        public async Task<IActionResult> EditUsersInRole(string Id)
+        [Authorize(Roles = "Writer")]
+        public async Task<IActionResult> EditUsersInRole(string Id)
         {
             ViewBag.roleId = Id;
             var role = await roleManager.FindByIdAsync(Id);
@@ -80,21 +80,13 @@ namespace YeetCarAccidents.Controllers
                     UserName = user.UserName,
                     IsSelected = false
                 };
-
-/*                if (await userManager.IsInRoleAsync(user, role.Name))
-                {
-                    UserRoleView.IsSelected = true;
-                }
-                else
-                {
-                    UserRoleView.IsSelected = false;
-                }*/
                 model.Add(UserRoleView);
             }
             return View(model);
         }
         [Route("Admin/EditUsersInRole")]
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> EditUsersInRole(List<UserModel> model, string Id)
         {
             var role = await roleManager.FindByIdAsync(Id);
@@ -124,12 +116,29 @@ namespace YeetCarAccidents.Controllers
                     if (i < (model.Count - 1))
                         continue;
                     else
-                        //return RedirectToAction("EditRole", new { Id = Id });
-                        return RedirectToAction("ListRoles");
+                        return RedirectToAction("EditRole", new { Id = Id });
                 }
             }
-            //return RedirectToAction("EditRole", new { Id = Id });
-            return RedirectToAction("ListRoles");
+            return RedirectToAction("EditRole", new { Id = Id });
+        }
+        //Save Role Assignments
+        [Route("Admin/EditRole")]
+        [HttpGet]
+        [Authorize(Roles = "Writer")]
+        public async Task<IActionResult> EditRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role id {id} is not found";
+                return View("NotFound");
+            }
+            var model = new EditRoleViewModel
+            {
+                Id = role.Id,
+                RoleName = role.Name
+            };
+            return View(model);
         }
     }
 }

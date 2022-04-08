@@ -29,25 +29,32 @@
 
     <div class="card-base-row">
         <div class="chip-container">
-     
+
             @* Dynamically generate chips showing the various boolean features of each crash*@
             @{
-                string[] classes = { "btn-outline-secondary", "btn-outline-info", "btn-outline-warning", "btn-outline-danger", "btn-outline-primary", "btn-outline-success", "btn-outline-dark"};
+                string[] classes = { "btn-outline-secondary", "btn-outline-info", "btn-outline-warning", "btn-outline-danger", "btn-outline-primary", "btn-outline-success", "btn-outline-dark" };
                 Random random = new Random();
-                int i = random.Next(5) ;
-             }
+                int i = random.Next(5);
+            }
             @foreach (string tag in Model.Tags)
-                {//dynamically apply classes ;)
+            {//dynamically apply classes ;)
                 <span class="btn btn-sm btn-disabled disabled tag-chip @classes[i]">@tag</span>
-                    if (i < classes.Length - 1)
-                        i++;
-                    else
-                        i = 0;
-                }
+                if (i < classes.Length - 1)
+                    i++;
+                else
+                    i = 0;
+            }
         </div>
-        <div class="align-baseline">
-            <a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.CrashId">Edit</a>
-            <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@Model.CrashId">Delete</a>
-        </div>
+        @if (ViewBag.isAdmin)
+        {
+            <div class="align-baseline">
+                <a class="btn btn-sm btn-warning" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.CrashId">Edit</a>
+                <a class="btn btn-sm btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@Model.CrashId">Delete</a>
+            </div>
+        }
+        else
+        {
+
+        }
     </div>
 </div>

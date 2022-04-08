@@ -47,6 +47,8 @@ namespace YeetCarAccidents.Controllers
         {
             const int cardsPerPage = 10;
             var crashes = new List<Crash>();
+            bool isAdmin = HttpContext.User.IsInRole("Writer");
+            ViewBag.isAdmin = isAdmin;
 
 
             if (filter is null)
@@ -126,17 +128,18 @@ namespace YeetCarAccidents.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        //*************************************************DELETE BEFORE DEPLOYMENT*****************************************
         //TEST
         [Route("SuperSecret")]
         [Route("Home/SuperSecret")]
         [HttpGet]
-        [Authorize(Roles = "Jerron")]
         public IActionResult SuperSecret()
         {
             bool isAdmin = HttpContext.User.IsInRole("Writer");
             ViewBag.isAdmin = isAdmin;
             return View();
         }
+        //******************************************************************************************************************
         //COOKIE SECTION
 
         [Route("MapCrash")]
@@ -194,6 +197,7 @@ namespace YeetCarAccidents.Controllers
 
         [Route("Home/CrashChange")]
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CrashChange(Crash c)
         {
             if (ModelState.IsValid)
@@ -221,6 +225,7 @@ namespace YeetCarAccidents.Controllers
         [Route("Edit")]
         [Route("Home/Edit")]
         [HttpGet]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Edit(int crashid)
         {
             ViewBag.Location = await _repo.Location.ToListAsync();
@@ -230,6 +235,7 @@ namespace YeetCarAccidents.Controllers
 
         [Route("Home/Edit")]
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public IActionResult Edit(Crash c)
         {
             _repo.UpdateCrash(c);
@@ -239,6 +245,7 @@ namespace YeetCarAccidents.Controllers
         [Route("Delete")]
         [Route("Home/Delete")]
         [HttpGet]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete(int crashid)
         {
             var crash = await _repo.Crashes.SingleAsync(x => x.CrashId == crashid);
@@ -247,6 +254,7 @@ namespace YeetCarAccidents.Controllers
 
         [Route("Delete")]
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete(Crash crash)
         {
             var c = await _repo.Crashes.SingleAsync(x => x.CrashId == crash.CrashId);
