@@ -33,7 +33,6 @@ namespace YeetCarAccidents.Controllers
         {
             return View();
         }
-
         [Route("Dashboard")]
         [Route("Home/Dashboard")]
         [Route("Dashboard/{County}")]
@@ -210,6 +209,13 @@ namespace YeetCarAccidents.Controllers
             _repo.DeleteCrash(c);
             return RedirectToAction("Admin");
         }
-        
+
+ 
+        [Route("Home/Causes")]
+        [HttpGet]
+        public IActionResult Causes()
+        {
+            return View();
+        }
     }
 }
