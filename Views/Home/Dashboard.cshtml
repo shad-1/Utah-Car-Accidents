@@ -28,7 +28,7 @@ worker-src 'none'" ;
 </div>
 <div class="row">
     @* Filter Builder *@
-    <div class="col-3 sticky-top h-vh">
+    <div class="col-4 sticky-top h-vh">
         <div class="d-flex flex-column h-100 justify-content-between">
             @* Create space between the pagination and categories*@
             <div>
@@ -36,12 +36,12 @@ worker-src 'none'" ;
                 <vc:filter filter="@Model.Filter"></vc:filter>
             </div>
 
-            <div class="page-navigation" page-info="@Model.PageInfo" page-action="Dashboard"></div>
+            <div class="page-navigation" page-info="@Model.PageInfo" filter="@Model.Filter" page-action="Dashboard"></div>
         </div>
 
     </div>
     @* Crash Quick Info Cards *@
-    <div class="col-9">
+    <div class="col-8">
         @foreach (Crash crash in Model.Crashes)
         {
             <partial name="CrashSummary" model="crash" />

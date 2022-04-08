@@ -22,5 +22,12 @@ namespace YeetCarAccidents
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        //public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        //    WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration((context, config) =>
+        //    {
+        //    config.AddSystemsManager($"/utah-crashes/{context.HostingEnvironment.EnvironmentName}/",
+        //            reloadAfter: TimeSpan.FromMinutes(5));
+        //    }).UseStartup<Startup>();
     }
 }
