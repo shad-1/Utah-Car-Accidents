@@ -47,15 +47,14 @@ namespace YeetCarAccidents.Controllers
         {
             const int cardsPerPage = 10;
             var crashes = new List<Crash>();
+            ViewBag.CurrentPage = pageNum;
+            ViewBag.Filter = filter;
             bool isAdmin = HttpContext.User.IsInRole("Writer");
             ViewBag.isAdmin = isAdmin;
 
 
             if (filter is null)
             {
-                //filter null check
-                //ViewBag.SelectedCounty = filter.County;
-
                 crashes = await _repo.Crashes
                     .Include("Location")
                     .OrderByDescending(crash => crash.DateTime)
@@ -65,16 +64,41 @@ namespace YeetCarAccidents.Controllers
             }
             else // We have a filter!
             {
-                if (filter.County != null)
-                {
-                    ViewBag.SelectedCounty = filter.County;
-                }
                 crashes = await _repo.Crashes
+                    .Take(500)
                     .Include("Location")
                     .OrderByDescending(crash => crash.DateTime)
-                    .Skip((pageNum - 1) * cardsPerPage)
-                    .Take(cardsPerPage)
                     .ToListAsync();
+
+                if (filter.County != null)
+                    crashes = crashes
+                    .Where(c => c.Location.County != null && c.Location.County == filter.County)
+                    .ToList();
+
+                if (filter.City != null)
+                    crashes = crashes
+                    .Where(c => c.Location.City != null && c.Location.City == filter.City)
+                    .ToList();
+
+                if (filter.Month != null)
+                    crashes = crashes
+                    .Where(c => c.DateTime != null && c.DateTime.Value.Month == filter.Month)
+                    .ToList();
+
+                if (filter.Year != null)
+                    crashes = crashes
+                    .Where(c => c.DateTime != null && c.DateTime.Value.Year == filter.Year)
+                    .ToList();
+
+                if (filter.booleans != null)
+                    foreach(var b in filter.booleans)
+                    {
+                        crashes = crashes.Where(c => c.GetType().GetProperty(b).GetValue(c).Equals(true)).ToList();
+                    }
+
+                crashes = crashes.AsQueryable()
+                    .Skip((pageNum - 1) * cardsPerPage)
+                    .Take(cardsPerPage).ToList();
             }
             //var location = await _repo.Location.Take(cardsPerPage * 3).AsNoTracking().ToListAsync(); //todo: add location filtering
 
