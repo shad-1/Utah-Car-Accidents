@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,8 @@ namespace YeetCarAccidents
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<InferenceSession>(
+                new InferenceSession("wwwroot/yeet.onnx"));
             services.AddDbContext<CrashContext>(options =>
                 options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
 
