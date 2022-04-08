@@ -22,8 +22,8 @@ namespace YeetCarAccidents.Controllers
         //VIEW ALL USERS
         [Route("Admin/ListUsers")]
         [HttpGet]
-        [Authorize(Roles ="Writer")]
-        public IActionResult ListUsers()
+/*        [Authorize(Roles ="Writer")]
+*/        public IActionResult ListUsers()
         {
             var users = userManager.Users;
             return View(users);
@@ -31,8 +31,8 @@ namespace YeetCarAccidents.Controllers
         //VIEW ALL ROLES
         [Route("Admin/ListRoles")]
         [HttpGet]
-        [Authorize(Roles = "Writer")]
-        public IActionResult ListRoles()
+/*        [Authorize(Roles = "Writer")]
+*/        public IActionResult ListRoles()
         {
             var roles = roleManager.Roles;
             return View(roles);
@@ -40,15 +40,15 @@ namespace YeetCarAccidents.Controllers
         //CREATE ROLES
         [HttpGet]
         [Route("Admin/CreateRole")]
-        [Authorize(Roles = "Writer")]
-        public IActionResult CreateRole()
+/*        [Authorize(Roles = "Writer")]
+*/        public IActionResult CreateRole()
         {
             return View();
         }
         [Route("Admin/CreateRole")]
         [HttpPost]
-        [Authorize(Roles = "Writer")]
-        public async Task<IActionResult> CreateRole(UserRoleView role)
+/*        [Authorize(Roles = "Writer")]
+*/        public async Task<IActionResult> CreateRole(UserRoleView role)
         {
             var roleExist = await roleManager.RoleExistsAsync(role.RoleName);
             if (!roleExist)
@@ -60,8 +60,8 @@ namespace YeetCarAccidents.Controllers
         //CHANGE ROLES OF USERS
         [Route("Admin/EditUsersInRole")]
         [HttpGet]
-        [Authorize(Roles = "Writer")]
-        public async Task<IActionResult> EditUsersInRole(string Id)
+/*        [Authorize(Roles = "Writer")]
+*/        public async Task<IActionResult> EditUsersInRole(string Id)
         {
             ViewBag.roleId = Id;
             var role = await roleManager.FindByIdAsync(Id);
@@ -93,7 +93,6 @@ namespace YeetCarAccidents.Controllers
         }
         [Route("Admin/EditUsersInRole")]
         [HttpPost]
-        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> EditUsersInRole(List<UserModel> model, string Id)
         {
             var role = await roleManager.FindByIdAsync(Id);

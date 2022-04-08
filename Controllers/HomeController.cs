@@ -33,7 +33,6 @@ namespace YeetCarAccidents.Controllers
         {
             return View();
         }
-
         [Route("Dashboard")]
         [Route("Home/Dashboard")]
         [Route("Dashboard/{County}")]
@@ -87,9 +86,11 @@ namespace YeetCarAccidents.Controllers
         [Route("SuperSecret")]
         [Route("Home/SuperSecret")]
         [HttpGet]
-        [Authorize]
-        public IActionResult SuperSecret()
+/*        [Authorize(Roles ="Writer")]
+*/        public IActionResult SuperSecret()
         {
+            bool isAdmin = HttpContext.User.IsInRole("Writer");
+            ViewBag.isAdmin = isAdmin;
             return View();
         }
         //COOKIE SECTION
@@ -208,6 +209,13 @@ namespace YeetCarAccidents.Controllers
             _repo.DeleteCrash(c);
             return RedirectToAction("Admin");
         }
-        
+
+ 
+        [Route("Home/Causes")]
+        [HttpGet]
+        public IActionResult Causes()
+        {
+            return View();
+        }
     }
 }
