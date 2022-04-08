@@ -8,11 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using YeetCarAccidents.Data;
+//using System.GetEnvironmentVariable;
 
 namespace YeetCarAccidents
 {
@@ -28,12 +31,16 @@ namespace YeetCarAccidents
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            string endpoint = Environment.GetEnvironmentVariable("ConnectionString", EnvironmentVariableTarget.Process);
+
+            //Configuration["ConnectionStrings:DefaultConnection"])
             services.AddDbContext<CrashContext>(options =>
-                options.UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
+                options.UseMySql(endpoint));
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(endpoint));
+            //Configuration.GetConnectionString("DefaultConnection")
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -98,5 +105,7 @@ namespace YeetCarAccidents
 
             });
         }
+
+
     }
 }

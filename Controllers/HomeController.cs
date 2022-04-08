@@ -142,6 +142,7 @@ namespace YeetCarAccidents.Controllers
         //******************************************************************************************************************
         //COOKIE SECTION
 
+
         [Route("MapCrash")]
         [Route("Home/MapCrash")]
         [HttpGet]
@@ -154,7 +155,7 @@ namespace YeetCarAccidents.Controllers
             var lati = c.Latitude.ToDouble();
             var longit = c.Longitude.ToDouble();
 
-            var murli = $"https://maps.googleapis.com/maps/api/staticmap?center=40.758701,-111.876183&zoom=8&size=800x800&key=AIzaSyALwDEe-8OduETgZsZ1xQ9RXTAbqbaYEbY&markers={lati},{longit}";
+            var murli = $"https://maps.googleapis.com/maps/api/staticmap?center=40.758701,-111.876183&zoom=8&size=800x800&key=AIzaSyALwDEe - 8OduETgZsZ1xQ9RXTAbqbaYEbY&markers={lati},{longit}";
 
             var mvm = new MapsViewModel
             {
